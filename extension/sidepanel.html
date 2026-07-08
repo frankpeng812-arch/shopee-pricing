@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopee跨境运营助手-虾皮定价/聊聊催取件</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/advanced-scene.css">
+  <link rel="stylesheet" href="css/delivery-urge.css">
+</head>
+<body>
+  <div class="container">
+    <div class="app-sticky-bar">
+      <div class="subpage-header" id="subpageHeader">
+        <div class="subpage-header-left">
+          <button type="button" class="subpage-header-back" id="subpageBackBtn" aria-label="返回更多能力">
+            <svg class="subpage-header-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14.5 6.5L9 12l5.5 5.5"/>
+            </svg>
+          </button>
+          <div class="subpage-header-title-group">
+            <h1 class="subpage-header-title" id="subpageHeaderTitle"></h1>
+            <span class="subpage-header-intro" id="advSubpageIntro" hidden>
+              <button type="button" class="subpage-intro-btn subpage-intro-tip" tabindex="0" aria-label="功能介绍">
+                <span class="subpage-intro-icon" aria-hidden="true">?</span>
+                <span class="subpage-intro-bubble" role="tooltip">输入成本与预期利润，自动计算各站点售价与净利润率；支持多站点多渠道批量模拟，帮助快速制定跨境定价策略。</span>
+              </button>
+            </span>
+            <span class="subpage-header-intro" id="mspSubpageIntro" hidden>
+              <button type="button" class="subpage-intro-btn subpage-intro-tip" tabindex="0" aria-label="功能介绍">
+                <span class="subpage-intro-icon" aria-hidden="true">?</span>
+                <span class="subpage-intro-bubble" role="tooltip">适合跨站点复用老品：选定参考站点与渠道，输入折前，自动反推实际毛利，再正向计算各目标站点参考售价；各站点毛利与折扣可单独调整</span>
+              </button>
+            </span>
+            <span class="subpage-header-intro" id="duSubpageIntro" hidden>
+              <button type="button" class="subpage-intro-btn subpage-intro-tip" tabindex="0" aria-label="功能介绍">
+                <span class="subpage-intro-icon" aria-hidden="true">?</span>
+                <span class="subpage-intro-bubble" role="tooltip">一键扫描 Shopee「运送中」订单，自动识别首次派送中与异常滞留包裹；支持复制催取话术并跳转聊聊，帮助降低末段物流纠纷与签收失败率。</span>
+              </button>
+            </span>
+          </div>
+        </div>
+        <span class="subpage-header-actions" id="advSubpageHeaderActions" hidden>
+          <button type="button" class="subpage-header-text-link" id="advSiteSettingsBtn">站点设置</button>
+        </span>
+        <span class="subpage-header-actions" id="mspSubpageHeaderActions" hidden>
+          <button type="button" class="subpage-header-text-link" id="mspSiteSettingsBtn">站点设置</button>
+        </span>
+        <span class="subpage-header-actions" id="duSubpageHeaderActions" hidden>
+          <button type="button" class="subpage-header-text-link" id="duScanSettingsBtn">扫描设置</button>
+        </span>
+      </div>
+    </div>
+
+    <!-- 更多能力：功能模块 + 声明 + 共创群 -->
+    <div id="page-more" class="page active">
+      <div class="more-page">
+        <div class="more-capability-grid">
+          <button type="button" class="more-capability-card" id="moreAdvancedBtn">
+            <span class="more-capability-free-badge" aria-hidden="true">Free</span>
+            <span class="more-capability-icon" aria-hidden="true">
+              <svg class="more-capability-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="6" width="32" height="36" rx="5" fill="#fff8f6" stroke="#ee4d2d" stroke-width="1.8"/>
+                <rect x="12" y="10" width="24" height="11" rx="2" fill="#fff" stroke="#ffb088" stroke-width="1.2"/>
+                <text x="24" y="18.5" text-anchor="middle" font-size="7" font-weight="700" fill="#ee4d2d">¥</text>
+                <line x1="14" y1="27" x2="34" y2="27" stroke="#ffb088" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="14" y1="32" x2="28" y2="32" stroke="#ffd0c4" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="14" y1="37" x2="30" y2="37" stroke="#ffd0c4" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="36" cy="36" r="5.5" fill="#ee4d2d"/>
+                <text x="36" y="38.5" text-anchor="middle" font-size="5.5" font-weight="700" fill="#fff">%</text>
+              </svg>
+            </span>
+            <span class="more-capability-label">定价模拟器</span>
+            <span class="more-capability-desc">输入成本与利润 · 多站算价</span>
+          </button>
+          <button type="button" class="more-capability-card" id="moreMultiSiteBtn">
+            <span class="more-capability-free-badge" aria-hidden="true">Free</span>
+            <span class="more-capability-icon" aria-hidden="true">
+              <svg class="more-capability-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="10" width="14" height="20" rx="3.5" fill="#fff8f6" stroke="#ee4d2d" stroke-width="1.8"/>
+                <line x1="7" y1="16" x2="15" y2="16" stroke="#ffb088" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="7" y1="20" x2="13" y2="20" stroke="#ffd0c4" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="7" y1="24" x2="14" y2="24" stroke="#ffd0c4" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="11" cy="28" r="3" fill="#ee4d2d"/>
+                <text x="11" y="29.5" text-anchor="middle" font-size="4.5" font-weight="700" fill="#fff">A</text>
+                <path d="M21 20h4" stroke="#ee4d2d" stroke-width="2" stroke-linecap="round"/>
+                <path d="M23.5 17.5l2.5 2.5-2.5 2.5" stroke="#ee4d2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="30" y="10" width="14" height="20" rx="3.5" fill="#fff8f6" stroke="#ffb088" stroke-width="1.8"/>
+                <line x1="33" y1="16" x2="41" y2="16" stroke="#ffb088" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="33" y1="20" x2="39" y2="20" stroke="#ffd0c4" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="33" y1="24" x2="40" y2="24" stroke="#ffd0c4" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="37" cy="28" r="3" fill="#ffb088"/>
+                <text x="37" y="29.5" text-anchor="middle" font-size="4.5" font-weight="700" fill="#fff">B</text>
+              </svg>
+            </span>
+            <span class="more-capability-label">老品跨站定价</span>
+            <span class="more-capability-desc">参考站点反推毛利 · 跨站算价</span>
+          </button>
+          <button type="button" class="more-capability-card" id="moreDeliveryUrgeBtn">
+            <span class="more-capability-icon" aria-hidden="true">
+              <svg class="more-capability-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="18" fill="#fff8f6" stroke="#ff4d20" stroke-width="1.8"/>
+                <path d="M24 10l2.5 8.5H35l-7 5.5 2.5 8.5L24 27l-6.5 5.5 2.5-8.5-7-5.5h8.5L24 10z" fill="#ff4d20"/>
+              </svg>
+            </span>
+            <span class="more-capability-label">派件异常催取</span>
+            <span class="more-capability-desc">智能识别派送异常，一键聊聊催取件，挽回退货损失</span>
+          </button>
+        </div>
+
+        <div class="more-disclaimer">
+          <div class="more-disclaimer-title">📋 使用说明 &amp; 免责</div>
+          <div class="more-disclaimer-body">
+            <p class="more-disclaimer-para"><strong>汇率核对：</strong>站点汇率每日实时获取。因官方模拟器未实时更新，两者可能存在微幅差异，这属于正常现象。</p>
+            <p class="more-disclaimer-para"><strong>费率确认：</strong>各站点内置默认费率。鉴于官方可能随时调整佣金、技术支持费、活动服务费等，使用前请务必前往<button type="button" class="more-disclaimer-link" id="moreSiteSettingsLink">「站点设置」</button>核对或自行修改。(注：计算结果仅供运营参考，实际盈亏以官方账单为准)</p>
+            <p class="more-disclaimer-para"><strong>催取声明：</strong>本工具通过安全时间切片与仿真串行技术识别异常，一键催取行为由卖家自主发起，请合理配置话术以防买家骚扰投诉。</p>
+            <p class="more-disclaimer-para"><strong>免责声明：</strong>定价计算结果与物流异常预警仅供跨境运营决策参考，店铺实际盈亏及物流最终状态请以 Shopee 官方账单和官方轨迹为准。</p>
+          </div>
+        </div>
+
+        <div class="more-notice-banner">
+          <div class="more-notice-main">
+            <div class="more-notice-title">💬 联系我们</div>
+            <div class="more-notice-desc">发现软件 Bug、有更高效的功能构想？加入共创群，与数百位跨境大卖一对一碰撞！群内还将实时追踪各大站点官方费率变动，下一款爆款运营提速工具，由你决定。</div>
+          </div>
+          <button type="button" class="more-notice-cta" id="moreCommunityBtn">联系我们</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 多站点定价：参考站点反推毛利，计算目标站点售价 -->
+    <div id="page-calculator" class="page">
+      <div class="adv-page-disclaimer" id="mspPageDisclaimer">
+        <div class="adv-page-disclaimer-toggle" id="mspPageDisclaimerToggle" role="button" tabindex="0" aria-expanded="false" aria-controls="mspPageDisclaimerBody">
+          <span class="adv-page-disclaimer-icon" aria-hidden="true">⚠</span>
+          <span class="adv-page-disclaimer-body" id="mspPageDisclaimerBody">
+            <span class="adv-page-disclaimer-line">免责说明：使用前建议与 <a href="https://solutions.shopee.cn/sellers/pricing-simulator/#/" class="adv-page-disclaimer-link" target="_blank" rel="noopener noreferrer">Shopee官方模拟器</a> 核对结果，确认无误后再用于实际定价。</span>
+            <span class="adv-page-disclaimer-extra">本工具站点汇率每日实时获取，因官方模拟器非实时更新，两者结果可能存在小幅差异，这属于正常现象。各站点内置默认费率。鉴于官方可能随时调整佣金、技术支持费、活动服务费等，使用前请务必前往<button type="button" class="adv-page-disclaimer-link adv-page-disclaimer-settings-btn">「站点设置」</button>核对或自行修改。(注：计算结果仅供运营参考，实际盈亏以官方账单为准)</span>
+          </span>
+          <span class="adv-page-disclaimer-chevron" aria-hidden="true">▾</span>
+        </div>
+      </div>
+      <div class="adv-panel">
+        <!-- ① 参考站点 -->
+        <div class="adv-section">
+          <div class="adv-section-head">
+            <span class="adv-step-num">1</span>
+            <span class="adv-section-title">选择参考站点渠道</span>
+            <span class="adv-site-select-tag">（仅单选）</span>
+          </div>
+          <div class="adv-section-body">
+            <div class="adv-field adv-field-site-channel">
+              <div class="adv-site-channel-picker">
+                <div class="adv-site-tag-stream" id="mspSourceTagStream" role="list" aria-label="已选参考站点渠道"></div>
+                <button type="button" class="adv-site-add-btn" id="mspSourceAddBtn">+ 配置参考站点渠道</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ② 目标站点 -->
+        <div class="adv-section">
+          <div class="adv-section-head">
+            <span class="adv-step-num">2</span>
+            <span class="adv-section-title">选择目标站点渠道</span>
+            <span class="adv-site-select-tag">（可多选）</span>
+          </div>
+          <div class="adv-section-body">
+            <div class="adv-field adv-field-site-channel">
+              <div class="adv-site-channel-picker">
+                <div class="adv-site-tag-stream" id="mspTargetTagStream" role="list" aria-label="已选目标站点渠道"></div>
+                <button type="button" class="adv-site-add-btn" id="mspTargetAddBtn">+ 配置目标站点渠道</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ③ 商品信息 -->
+        <div class="adv-section">
+          <div class="adv-section-head">
+            <span class="adv-step-num">3</span>
+            <span class="adv-section-title">输入商品信息</span>
+          </div>
+          <div class="adv-step2-site-warn" id="mspStep3Warn" hidden></div>
+          <div class="adv-section-body">
+            <div class="adv-field adv-field-unit">
+              <label for="mspSourcePrice" id="mspSourcePriceLabel">折前售价</label>
+              <div class="adv-input-with-unit">
+                <span class="adv-input-prefix" id="mspSourcePricePrefix">₱</span>
+                <input type="text" id="mspSourcePrice" placeholder="0.00" inputmode="decimal" autocomplete="off" value="" disabled>
+                <span class="adv-input-suffix" id="mspSourcePriceUnit">PHP</span>
+              </div>
+              <div class="adv-field-hint" id="mspSourcePriceHint">≈ 0 CNY</div>
+            </div>
+
+            <div class="adv-field adv-field-unit">
+              <label for="mspDiscount">折扣</label>
+              <div class="adv-input-with-unit">
+                <input type="text" id="mspDiscount" placeholder="0.00" inputmode="decimal" autocomplete="off" value="0" disabled>
+                <span class="adv-input-suffix">%OFF</span>
+              </div>
+            </div>
+
+            <div class="adv-field adv-field-unit">
+              <label for="mspWeight">包裹重量</label>
+              <div class="adv-input-with-unit">
+                <input type="text" id="mspWeight" placeholder="0.00" inputmode="decimal" autocomplete="off" value="120" disabled>
+                <span class="adv-input-suffix">g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ④ 其他信息 -->
+        <div class="adv-section">
+          <div class="adv-section-head">
+            <span class="adv-step-num">4</span>
+            <span class="adv-section-title">输入其他信息</span>
+          </div>
+          <div class="adv-section-body">
+            <div class="adv-field adv-field-unit">
+              <label for="mspDomesticShipping">境内段运费</label>
+              <div class="adv-input-with-unit">
+                <span class="adv-input-prefix">¥</span>
+                <input type="text" id="mspDomesticShipping" placeholder="0.00" inputmode="decimal" autocomplete="off" value="1.2">
+                <span class="adv-input-suffix">CNY</span>
+              </div>
+            </div>
+            <p class="adv-config-tip">
+              各站点的佣金、交易手续费、活动服务费、提现手续费等费率请通过
+              <a href="#" id="mspGoConfigLink" class="adv-config-link">站点设置</a>
+              进行配置。
+            </p>
+          </div>
+        </div>
+
+        <div class="adv-message" id="mspMessage"></div>
+      </div>
+
+      <div class="adv-results" id="mspResults"></div>
+
+      <!-- 站点渠道选择抽屉 -->
+      <div class="adv-site-drawer" id="mspDrawer" hidden>
+        <div class="adv-site-drawer-backdrop" id="mspDrawerBackdrop"></div>
+        <div class="adv-site-drawer-panel" role="dialog" aria-labelledby="mspDrawerTitle">
+          <div class="adv-site-drawer-head">
+            <span class="adv-site-drawer-title" id="mspDrawerTitle">配置站点渠道</span>
+            <button type="button" class="adv-site-drawer-close" id="mspDrawerClose" aria-label="关闭">×</button>
+          </div>
+          <div class="adv-cascade" id="mspSiteCascade">
+            <div class="adv-cascade-col adv-cascade-col-site">
+              <div class="adv-cascade-col-head">站点</div>
+              <div class="adv-cascade-col-body" id="mspCascadeSiteBody"></div>
+            </div>
+            <div class="adv-cascade-col adv-cascade-col-cargo">
+              <div class="adv-cascade-col-head">货品</div>
+              <div class="adv-cascade-col-body" id="mspCascadeCargoBody"></div>
+            </div>
+            <div class="adv-cascade-col adv-cascade-col-channel">
+              <div class="adv-cascade-col-head">物流渠道</div>
+              <div class="adv-cascade-col-body" id="mspCascadeChannelBody"></div>
+            </div>
+            <div class="adv-cascade-col adv-cascade-col-zone" id="mspCascadeZoneCol" hidden>
+              <div class="adv-cascade-col-head">分区</div>
+              <div class="adv-cascade-col-body" id="mspCascadeZoneBody"></div>
+            </div>
+          </div>
+          <div class="adv-site-drawer-foot">
+            <button type="button" class="adv-site-drawer-confirm" id="mspDrawerConfirm" disabled>确认选择</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 定价模拟器（独立模块，见 js/advanced-scene*.js） -->
+    <div id="page-advanced" class="page">
+      <div class="adv-page-disclaimer" id="advPageDisclaimer">
+        <div class="adv-page-disclaimer-toggle" id="advPageDisclaimerToggle" role="button" tabindex="0" aria-expanded="false" aria-controls="advPageDisclaimerBody">
+          <span class="adv-page-disclaimer-icon" aria-hidden="true">⚠</span>
+          <span class="adv-page-disclaimer-body" id="advPageDisclaimerBody">
+            <span class="adv-page-disclaimer-line">免责说明：使用前建议与 <a href="https://solutions.shopee.cn/sellers/pricing-simulator/#/" class="adv-page-disclaimer-link" target="_blank" rel="noopener noreferrer">Shopee官方模拟器</a> 核对结果，确认无误后再用于实际定价。</span>
+            <span class="adv-page-disclaimer-extra">本工具站点汇率每日实时获取，因官方模拟器非实时更新，两者结果可能存在小幅差异，这属于正常现象。各站点内置默认费率。鉴于官方可能随时调整佣金、技术支持费、活动服务费等，使用前请务必前往<button type="button" class="adv-page-disclaimer-link adv-page-disclaimer-settings-btn" id="advDisclaimerSiteSettingsLink">「站点设置」</button>核对或自行修改。(注：计算结果仅供运营参考，实际盈亏以官方账单为准)</span>
+          </span>
+          <span class="adv-page-disclaimer-chevron" aria-hidden="true">▾</span>
+        </div>
+      </div>
+      <div class="adv-panel">
+        <!-- ① 基础信息 -->
+        <div class="adv-section">
+          <div class="adv-section-head">
+            <span class="adv-step-num">1</span>
+            <span class="adv-section-title">输入基础信息</span>
+          </div>
+          <div class="adv-section-body">
+            <div class="adv-field">
+              <label for="advSceneMode">计算模式</label>
+              <select id="advSceneMode"></select>
+            </div>
+            <div class="adv-field adv-field-site-channel">
+              <div class="adv-field-label-row">
+                <label for="advSiteAddBtn">站点渠道</label>
+                <span class="adv-site-select-tag" id="advSiteSelectTag">（可多选）</span>
+                <span class="adv-help-tip" id="advSiteSelectHelp" tabindex="0" role="button" aria-describedby="advSiteSelectHelpBubble">
+                  <svg class="adv-help-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                  </svg>
+                  <span class="adv-help-bubble" id="advSiteSelectHelpBubble" role="tooltip"></span>
+                </span>
+              </div>
+              <div class="adv-site-channel-picker" id="advSiteChannelPicker">
+                <div class="adv-site-tag-stream" id="advSiteTagStream" role="list" aria-label="已选站点渠道"></div>
+                <button type="button" class="adv-site-add-btn" id="advSiteAddBtn">+ 配置站点渠道</button>
+              </div>
+              <div class="adv-site-drawer" id="advSiteDrawer" hidden>
+                <div class="adv-site-drawer-backdrop" id="advSiteDrawerBackdrop"></div>
+                <div class="adv-site-drawer-panel" id="advSiteDrawerPanel" role="dialog" aria-labelledby="advSiteDrawerTitle">
+                  <div class="adv-site-drawer-head">
+                    <span class="adv-site-drawer-title" id="advSiteDrawerTitle">配置站点渠道</span>
+                    <button type="button" class="adv-site-drawer-close" id="advSiteDrawerClose" aria-label="关闭">×</button>
+                  </div>
+                  <div class="adv-cascade" id="advSiteCascade">
+                    <div class="adv-cascade-col adv-cascade-col-site" id="advCascadeSiteCol">
+                      <div class="adv-cascade-col-head">站点</div>
+                      <div class="adv-cascade-col-body" id="advCascadeSiteBody"></div>
+                    </div>
+                    <div class="adv-cascade-col adv-cascade-col-cargo" id="advCascadeCargoCol">
+                      <div class="adv-cascade-col-head">货品</div>
+                      <div class="adv-cascade-col-body" id="advCascadeCargoBody"></div>
+                    </div>
+                    <div class="adv-cascade-col adv-cascade-col-channel" id="advCascadeChannelCol">
+                      <div class="adv-cascade-col-head">物流渠道</div>
+                      <div class="adv-cascade-col-body" id="advCascadeChannelBody"></div>
+                    </div>
+                    <div class="adv-cascade-col adv-cascade-col-zone" id="advCascadeZoneCol" hidden>
+                      <div class="adv-cascade-col-head">分区</div>
+                      <div class="adv-cascade-col-body" id="advCascadeZoneBody"></div>
+                    </div>
+                  </div>
+                  <div class="adv-site-drawer-foot">
+                    <button type="button" class="adv-site-drawer-confirm" id="advSiteDrawerConfirm" disabled>一键添加</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ② 商品信息 -->
+        <div class="adv-section">
+          <div class="adv-section-head">
+            <span class="adv-step-num">2</span>
+            <span class="adv-section-title">输入单个商品信息</span>
+          </div>
+          <div class="adv-step2-site-warn" id="advStep2SiteWarn" hidden></div>
+          <div class="adv-section-body" id="advStep2Body">
+            <div class="adv-field adv-field-unit">
+              <label for="advSceneCost">商品成本价</label>
+              <div class="adv-input-with-unit">
+                <span class="adv-input-prefix">¥</span>
+                <input type="text" id="advSceneCost" placeholder="0.00" inputmode="decimal" autocomplete="off" value="50">
+                <span class="adv-input-suffix">CNY</span>
+              </div>
+            </div>
+
+            <div class="adv-field adv-field-unit adv-field-mode" id="advModeField">
+              <label for="advSceneModeValue" id="advSceneModeValueLabel">预期净利润</label>
+              <div class="adv-mode-value-row">
+                <div class="adv-input-with-unit adv-input-compact">
+                  <span class="adv-input-prefix" id="advModePrefix">¥</span>
+                  <input type="text" id="advSceneModeValue" placeholder="0.00" inputmode="decimal" autocomplete="off" value="20">
+                  <span class="adv-input-suffix" id="advModeUnit">CNY</span>
+                </div>
+                <button type="button" class="adv-apply-all-btn" id="advApplyModeAllBtn" hidden>应用到全部</button>
+              </div>
+            </div>
+
+            <div class="adv-field adv-field-unit" id="advSellingPriceField" hidden>
+              <label for="advSceneSellingPrice">预期折后售价</label>
+              <div class="adv-input-with-unit">
+                <span class="adv-input-prefix" id="advSellingPrefix">RM</span>
+                <input type="text" id="advSceneSellingPrice" placeholder="0.00" inputmode="decimal" autocomplete="off" value="">
+                <span class="adv-input-suffix" id="advSellingUnit">MYR</span>
+              </div>
+              <div class="adv-field-hint" id="advSellingPriceHint">≈ 0 CNY | MYR</div>
+            </div>
+
+            <div class="adv-field adv-field-unit">
+              <label for="advSceneDiscount">折扣</label>
+              <div class="adv-input-with-unit">
+                <input type="text" id="advSceneDiscount" placeholder="0.00" inputmode="decimal" autocomplete="off" value="0">
+                <span class="adv-input-suffix">%OFF</span>
+              </div>
+            </div>
+
+            <div class="adv-field adv-field-unit">
+              <label for="advSceneWeight">包裹重量</label>
+              <div class="adv-input-with-unit">
+                <input type="text" id="advSceneWeight" placeholder="0.00" inputmode="decimal" autocomplete="off" value="120">
+                <span class="adv-input-suffix">g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ③ 其他信息 -->
+        <div class="adv-section">
+          <div class="adv-section-head">
+            <span class="adv-step-num">3</span>
+            <span class="adv-section-title">输入其他信息</span>
+          </div>
+          <div class="adv-section-body">
+            <div class="adv-field adv-field-unit">
+              <label for="advSceneDomesticShipping">境内段运费</label>
+              <div class="adv-input-with-unit">
+                <span class="adv-input-prefix">¥</span>
+                <input type="text" id="advSceneDomesticShipping" placeholder="0.00" inputmode="decimal" autocomplete="off" value="1.2">
+                <span class="adv-input-suffix">CNY</span>
+              </div>
+            </div>
+            <p class="adv-config-tip">
+              各站点的佣金、交易手续费、活动服务费、提现手续费等费率请通过右上角
+              <a href="#" id="advGoConfigLink" class="adv-config-link">站点设置</a>
+              进行配置。
+            </p>
+          </div>
+        </div>
+
+        <div class="adv-message" id="advSceneMessage"></div>
+      </div>
+
+      <div class="adv-results" id="advSceneResults"></div>
+
+    </div>
+
+    <!-- 站点设置抽屉（从定价模拟器右上角入口打开） -->
+    <div class="site-settings-drawer" id="siteSettingsDrawer" hidden>
+      <div class="site-settings-drawer-backdrop" id="siteSettingsDrawerBackdrop"></div>
+      <div class="site-settings-drawer-panel" role="dialog" aria-labelledby="siteSettingsDrawerTitle">
+        <div class="site-settings-drawer-head">
+          <div class="site-settings-drawer-head-row">
+            <span class="site-settings-drawer-title" id="siteSettingsDrawerTitle">站点设置</span>
+            <button type="button" class="site-settings-drawer-close" id="siteSettingsDrawerClose" aria-label="关闭">×</button>
+          </div>
+          <div class="site-settings-drawer-tabs" role="tablist" aria-label="站点设置分类">
+            <button type="button" class="site-settings-tab active" id="siteSettingsTabFeesBtn" role="tab" aria-selected="true" aria-controls="siteSettingsTabFees" data-tab="fees">费率设置</button>
+            <button type="button" class="site-settings-tab" id="siteSettingsTabFxBtn" role="tab" aria-selected="false" aria-controls="siteSettingsTabFx" data-tab="fx">实时汇率</button>
+          </div>
+        </div>
+        <div class="site-settings-drawer-body">
+          <div class="site-settings-tab-panel active" id="siteSettingsTabFees" role="tabpanel" aria-labelledby="siteSettingsTabFeesBtn">
+            <div class="config-site-wrap" id="siteCards"></div>
+            <div class="message" id="configMessage"></div>
+          </div>
+          <div class="site-settings-tab-panel" id="siteSettingsTabFx" role="tabpanel" aria-labelledby="siteSettingsTabFxBtn" hidden>
+            <div class="fx-panel" id="fxPanel">
+              <div class="fx-panel-head">
+                <span class="fx-panel-title">📊 实时汇率 (1 CNY = , 只读)</span>
+                <button type="button" class="fx-refresh-btn" id="refreshFxBtn" aria-label="刷新汇率" title="刷新汇率">
+                  <svg class="fx-refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M23 4v6h-6"/>
+                    <path d="M1 20v-6h6"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/>
+                    <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/>
+                  </svg>
+                </button>
+              </div>
+              <hr class="fx-divider">
+              <div class="fx-rates" id="fxRatesDisplay">加载中…</div>
+              <hr class="fx-divider">
+              <div class="fx-meta"><span id="fxUpdatedAt">—</span></div>
+              <div class="message fx-message" id="fxMessage"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="config-drawer" id="siteConfigDrawer" hidden>
+      <div class="config-drawer-backdrop" id="siteConfigDrawerBackdrop"></div>
+      <div class="config-drawer-panel">
+        <div class="config-drawer-head">
+          <span class="config-drawer-title" id="siteConfigDrawerTitle">配置费率</span>
+          <button type="button" class="config-drawer-close" id="siteConfigDrawerClose" aria-label="关闭">×</button>
+        </div>
+        <div class="config-drawer-body" id="siteConfigDrawerBody"></div>
+        <div class="config-drawer-foot">
+          <button type="button" class="config-drawer-confirm" id="siteConfigDrawerSave">确认保存</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 派件异常催取 -->
+    <div id="page-deliveryUrge" class="page">
+      <div class="du-panel">
+        <div class="du-main" id="duMain" data-du-state="guide">
+          <div class="du-view du-view-locked" id="duLocked" hidden aria-hidden="true"></div>
+          <div class="du-usage-banner" id="duUsageBanner" hidden>
+            <span class="du-usage-banner-main" id="duUsageBannerMain"></span>
+            <span class="du-usage-banner-actions" id="duUsageBannerHint">
+              <button type="button" class="du-credential-copy-btn" id="duCopyCredentialBtn" title="复制凭证号" aria-label="复制凭证号"></button>
+              <span class="du-credential-copy-tip" id="duCredentialCopyTip" hidden>凭证号已复制</span>
+            </span>
+          </div>
+          <div class="du-view du-view-guide" id="duGuide">
+            <div class="du-guide-icon">📦</div>
+            <h3 class="du-guide-title">派件异常催取</h3>
+            <p class="du-guide-desc">请先在 Shopee 卖家中心打开「我的销售 → 运送中」订单列表页，并在左上角切换到目标站点店铺后，再返回插件开始扫描。</p>
+            <button type="button" class="du-guide-link-btn" id="duGoShippingBtn">前往 Shopee 运送中订单页 →</button>
+            <p class="du-guide-hint">站点切换请在 Shopee 后台自行完成，插件会自动识别当前页面。</p>
+          </div>
+          <div class="du-view du-view-ready" id="duReady">
+            <div class="du-ready-center">
+              <div class="du-status" id="duStatus"></div>
+              <button type="button" class="du-scan-btn" id="duScanBtn">🔍 开始一键扫描当前站点包裹</button>
+            </div>
+          </div>
+          <div class="du-view du-view-scanning" id="duScanning">
+            <div class="du-scan-warning du-scan-warning-listing" id="duScanWarningListing">
+              <span class="du-scan-warning-icon">⚠️</span>
+              <span>正在拉取订单列表，请保持 Shopee <strong>运送中页面</strong> 所在标签页打开，<strong>不要刷新、关闭或在 Shopee 内跳转</strong>；可切换到其他浏览器标签</span>
+            </div>
+            <div class="du-scan-warning du-scan-warning-tracking" id="duScanWarningTracking" hidden>
+              <span class="du-scan-warning-icon">✓</span>
+              <span>订单列表已拉取完成，可自由切换浏览器标签页</span>
+            </div>
+            <div class="du-scanning-head">
+              <div class="du-scanning-spinner"></div>
+              <p class="du-scanning-title" id="duScanPhase">正在扫描运送中订单…</p>
+              <p class="du-scanning-desc" id="duScanDesc">读取运送中订单并识别需催取的包裹</p>
+            </div>
+            <div class="du-progress-wrap">
+              <div class="du-progress-bar">
+                <div class="du-progress-fill" id="duProgressFill"></div>
+              </div>
+              <div class="du-progress-meta">
+                <span id="duProgressCount">已拉取 0 单</span>
+                <span id="duProgressDetail">准备中…</span>
+              </div>
+              <div class="du-progress-eta" id="duProgressEta" hidden></div>
+            </div>
+            <button type="button" class="du-cancel-scan-btn" id="duCancelScanBtn">取消扫描</button>
+          </div>
+          <div class="du-view du-view-results" id="duResults">
+            <button type="button" class="du-scan-btn" id="duRescanBtn">🔍 重新扫描当前站点包裹</button>
+            <div class="du-inline-scan" id="duInlineScan" hidden>
+              <div class="du-scan-warning du-scan-warning-tracking">
+                <span class="du-scan-warning-icon">⏳</span>
+                <span id="duInlineScanHint">正在后台分析物流，关注单将实时渲染至下方列表</span>
+              </div>
+              <div class="du-progress-wrap du-progress-wrap-inline">
+                <div class="du-progress-bar">
+                  <div class="du-progress-fill" id="duInlineProgressFill"></div>
+                </div>
+                <div class="du-progress-meta">
+                  <span id="duInlineProgressCount">分析进度 0 / 0 单</span>
+                  <span id="duInlineProgressDetail">已发现 0 单需关注</span>
+                </div>
+              </div>
+              <button type="button" class="du-cancel-scan-btn" id="duInlineCancelScanBtn">取消扫描</button>
+            </div>
+            <div class="du-status" id="duResultsStatus"></div>
+            <div class="du-result-block" id="duResultBlock">
+              <div class="du-summary" id="duSummary"></div>
+              <div class="du-result-body">
+                <div class="du-tabs" id="duTabs"></div>
+                <div class="du-order-list" id="duOrderList"></div>
+                <div class="du-message-tab-panel" id="duMessageTabPanel" hidden>
+                  <div class="du-config du-config-inline">
+                    <div class="du-config-head">
+                      <label class="du-config-label" for="duMessageTemplate">自定义催取话术（支持 {name} 占位符）</label>
+                      <button type="button" class="du-message-reset" id="duMessageReset">恢复默认</button>
+                    </div>
+                    <textarea id="duMessageTemplate" placeholder="输入催取话术…"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="du-settings-drawer" id="duSettingsDrawer" hidden>
+        <div class="du-settings-backdrop" id="duSettingsBackdrop"></div>
+        <div class="du-settings-panel">
+          <div class="du-settings-head">
+            <span class="du-settings-title">扫描设置</span>
+            <button type="button" class="du-settings-close" id="duSettingsClose" aria-label="关闭">×</button>
+          </div>
+          <div class="du-settings-body">
+            <div class="du-settings-section">
+              <p class="du-settings-desc">为提高物流末端的订单扫描效率，对下单时间较近的超新订单跳过物流轨迹深度分析，可显著加快扫描速度。</p>
+              <div class="du-settings-field">
+                <label class="du-settings-field-label" for="duSkipRecentDays">新单免分析天数</label>
+                <div class="du-settings-field-control">
+                  <input type="number" id="duSkipRecentDays" class="du-skip-days-input" min="1" max="20" step="1" value="3" inputmode="numeric" />
+                  <span class="du-settings-field-unit">天</span>
+                </div>
+                <p class="du-settings-field-hint">小于该天数的订单不分析物流轨迹</p>
+              </div>
+              <p class="du-settings-hint" id="duSkipRecentDaysHint">建议按您站点实际最快送达天数设置。例如当地物流通常 5 天可达，可设为 5 天——此时间段内的订单大多仍在正常运输周期，跳过深度分析可显著加快扫描。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="du-drawer-overlay" id="duDrawerOverlay" hidden>
+        <div class="du-drawer-backdrop" id="duDrawerBackdrop"></div>
+        <div class="du-drawer-panel" id="duDrawerPanel">
+          <div class="du-drawer-head">
+            <span class="du-drawer-title" id="duDrawerTitle">完整物流轨迹</span>
+            <button type="button" class="du-drawer-close" id="duDrawerClose" aria-label="关闭">×</button>
+          </div>
+          <div class="du-drawer-body" id="duDrawerBody"></div>
+        </div>
+      </div>
+      <div class="du-toast" id="duToast" hidden></div>
+    </div>
+
+    <div class="more-modal" id="moreModal" hidden>
+      <div class="more-modal-backdrop" id="moreModalBackdrop"></div>
+      <div class="more-modal-panel" role="dialog" aria-modal="true">
+        <button type="button" class="more-modal-close" id="moreModalClose" aria-label="关闭">×</button>
+        <div class="more-modal-body" id="moreModalBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/pricing-core.js"></script>
+  <script src="js/cost-pricing-data.js"></script>
+  <script src="js/bundled-site-fees.js"></script>
+  <script src="js/remote-config.js"></script>
+  <script src="js/advanced-scene.js"></script>
+  <script src="js/advanced-scene-ui.js"></script>
+  <script src="js/multi-site-pricing-ui.js"></script>
+  <script src="js/delivery-urge-core.js"></script>
+  <script src="js/delivery-urge-license.js"></script>
+  <script src="js/delivery-urge-license-ui.js"></script>
+  <script src="js/delivery-urge-ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

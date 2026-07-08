@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>物流藏价规则核对</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.5;
+    }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 20px 16px 40px; }
+    h1 { margin: 0 0 4px; font-size: 1.35rem; }
+    .meta { color: #666; font-size: 0.85rem; margin-bottom: 16px; }
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      background: #fff; border: 1px solid #eee; border-radius: 10px;
+      padding: 12px; margin-bottom: 14px;
+    }
+    .toolbar input, .toolbar select {
+      padding: 7px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.88rem;
+    }
+    .toolbar input { flex: 1; min-width: 180px; }
+    .stat { font-size: 0.82rem; color: #888; margin-left: auto; }
+    table {
+      width: 100%; border-collapse: collapse; background: #fff;
+      border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      font-size: 0.82rem;
+    }
+    th, td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; text-align: left; vertical-align: top; }
+    th { background: #fafafa; font-weight: 600; color: #555; position: sticky; top: 0; z-index: 1; }
+    tr:hover td { background: #fffaf8; }
+    .tag {
+      display: inline-block; padding: 1px 6px; border-radius: 4px;
+      font-size: 0.72rem; font-weight: 600;
+    }
+    .tag-air { background: #e3f2fd; color: #1565c0; }
+    .tag-sea { background: #e0f2f1; color: #00695c; }
+    .tag-pickup { background: #f3e5f5; color: #7b1fa2; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.78rem; }
+    .raw { color: #999; font-size: 0.75rem; }
+    .site-head td {
+      background: #fff3ef; font-weight: 700; color: #c0392b;
+      border-top: 2px solid #ee4d2d;
+    }
+    .err { color: #c0392b; padding: 20px; background: #fff; border-radius: 8px; }
+    .upload-box {
+      margin-top: 12px; padding: 12px; border: 1px dashed #ccc;
+      border-radius: 8px; background: #fff;
+    }
+    .upload-box input[type=file] { font-size: 0.85rem; }
+    .btn {
+      padding: 7px 14px; border: none; border-radius: 6px;
+      background: #ee4d2d; color: #fff; font-weight: 600; cursor: pointer;
+    }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .msg { font-size: 0.82rem; margin-top: 6px; min-height: 1.2em; }
+    .msg.ok { color: #27ae60; }
+    .msg.fail { color: #c0392b; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>物流藏价规则核对</h1>
+    <div class="meta" id="meta">加载中…</div>
+
+    <div class="toolbar">
+      <select id="filterSite"><option value="">全部站点</option></select>
+      <select id="filterCargo"><option value="">全部货品</option></select>
+      <select id="filterType">
+        <option value="">全部类型</option>
+        <option value="air">空运</option>
+        <option value="sea">海运</option>
+        <option value="pickup">自提</option>
+      </select>
+      <input type="search" id="filterText" placeholder="搜索渠道名称…">
+      <span class="stat" id="stat"></span>
+    </div>
+
+    <div class="upload-box">
+      <strong>更新表格（无需重新发布插件）</strong>
+      <p style="margin:6px 0;font-size:0.82rem;color:#666">
+        上传新的 Excel 后，服务端自动解析；插件会在下次打开或手动刷新时拉取最新数据。
+      </p>
+      <input type="file" id="uploadFile" accept=".xlsx,.xls">
+      <button class="btn" id="uploadBtn" style="margin-left:8px">上传并解析</button>
+      <div class="msg" id="uploadMsg"></div>
+    </div>
+
+    <table style="margin-top:16px">
+      <thead>
+        <tr>
+          <th>站点</th>
+          <th>货品</th>
+          <th>渠道</th>
+          <th>类型</th>
+          <th>藏价规则</th>
+          <th>买家运费</th>
+          <th>表格原文</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    let allChannels = [];
+    let payload = null;
+
+    const TYPE_LABEL = { air: "空运", sea: "海运", pickup: "自提" };
+    const SITE_NAME = {
+      SG: "新加坡", MY: "马来西亚", TH: "泰国", PH: "菲律宾",
+      VN: "越南", TW: "台湾", BR: "巴西", MX: "墨西哥", AR: "阿根廷",
+    };
+
+    function tagClass(t) {
+      return t === "sea" ? "tag-sea" : t === "pickup" ? "tag-pickup" : "tag-air";
+    }
+
+    function render() {
+      const site = document.getElementById("filterSite").value;
+      const cargo = document.getElementById("filterCargo").value;
+      const type = document.getElementById("filterType").value;
+      const q = document.getElementById("filterText").value.trim().toLowerCase();
+
+      const rows = allChannels.filter((c) => {
+        if (site && c.site !== site) return false;
+        if (cargo && c.cargo !== cargo) return false;
+        if (type && c.type !== type) return false;
+        if (q && !(c.display + c.label + c.site).toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      document.getElementById("stat").textContent = `显示 ${rows.length} / ${allChannels.length} 条`;
+
+      let lastSite = "";
+      const tbody = document.getElementById("tbody");
+      tbody.innerHTML = rows.map((c) => {
+        const siteRow = c.site !== lastSite
+          ? `<tr class="site-head"><td colspan="7">${SITE_NAME[c.site] || c.site} (${c.site})</td></tr>`
+          : "";
+        lastSite = c.site;
+        return siteRow + `<tr>
+          <td>${c.site}</td>
+          <td>${c.cargo}</td>
+          <td>${c.display.replace(/\n/g, "<br>")}</td>
+          <td><span class="tag ${tagClass(c.type)}">${TYPE_LABEL[c.type] || c.type}</span></td>
+          <td class="mono">${c.ruleSummary || "—"}</td>
+          <td class="mono">${c.buyerRuleSummary || "—"}</td>
+          <td class="raw">${c.rawBase || "—"}<br>${c.rawStep || "—"}<br>${c.rawBuyerBase || "—"}<br>${c.rawBuyerStep || "—"}</td>
+        </tr>`;
+      }).join("");
+    }
+
+    function fillFilters() {
+      const sites = [...new Set(allChannels.map((c) => c.site))].sort();
+      const cargos = [...new Set(allChannels.map((c) => c.cargo))];
+      const siteSel = document.getElementById("filterSite");
+      const cargoSel = document.getElementById("filterCargo");
+      siteSel.innerHTML = '<option value="">全部站点</option>' +
+        sites.map((s) => `<option value="${s}">${SITE_NAME[s] || s}</option>`).join("");
+      cargoSel.innerHTML = '<option value="">全部货品</option>' +
+        cargos.map((c) => `<option value="${c}">${c}</option>`).join("");
+    }
+
+    async function loadData() {
+      const res = await fetch("/api/shipping-data");
+      if (!res.ok) throw new Error(await res.text());
+      payload = await res.json();
+      allChannels = payload.channels || [];
+      document.getElementById("meta").textContent =
+        `来源：${payload.sourceFile || "—"} · 更新：${payload.updatedAt || "—"} · 版本：${payload.version || "—"} · 共 ${payload.channelCount || allChannels.length} 条渠道`;
+      fillFilters();
+      render();
+    }
+
+    ["filterSite", "filterCargo", "filterType"].forEach((id) => {
+      document.getElementById(id).addEventListener("change", render);
+    });
+    document.getElementById("filterText").addEventListener("input", render);
+
+    document.getElementById("uploadBtn").addEventListener("click", async () => {
+      const file = document.getElementById("uploadFile").files[0];
+      const msg = document.getElementById("uploadMsg");
+      const btn = document.getElementById("uploadBtn");
+      if (!file) { msg.textContent = "请先选择 Excel 文件"; msg.className = "msg fail"; return; }
+      btn.disabled = true;
+      msg.textContent = "上传解析中…"; msg.className = "msg";
+      try {
+        const fd = new FormData();
+        fd.append("file", file);
+        const res = await fetch("/admin/upload", { method: "POST", body: fd });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "上传失败");
+        msg.textContent = `已更新：${data.channelCount} 条渠道，版本 ${data.version}`;
+        msg.className = "msg ok";
+        await loadData();
+      } catch (e) {
+        msg.textContent = e.message;
+        msg.className = "msg fail";
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    loadData().catch((e) => {
+      document.getElementById("meta").innerHTML = `<span class="err">加载失败：${e.message}<br>请先运行服务并上传 Excel。</span>`;
+    });
+  </script>
+</body>
+</html>

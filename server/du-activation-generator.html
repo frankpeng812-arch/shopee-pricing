@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>派件异常催取 — 激活码生成</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(180deg, #fff8f6 0%, #f5f7fa 220px);
+      color: #333;
+      line-height: 1.6;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 28px 16px 48px; }
+    h1 { margin: 0 0 6px; font-size: 1.45rem; }
+    .subtitle { color: #666; font-size: 0.9rem; margin-bottom: 20px; }
+    .card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.04);
+    }
+    .card h2 { margin: 0 0 10px; font-size: 0.95rem; color: #444; }
+    ol.steps { margin: 0; padding-left: 1.25rem; color: #555; font-size: 0.88rem; }
+    ol.steps li { margin-bottom: 6px; }
+    label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 6px; color: #444; }
+    input[type="text"], input[type="file"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: 0.04em;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #ff4d20;
+      box-shadow: 0 0 0 3px rgba(255, 77, 32, 0.12);
+    }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-primary { background: #ff4d20; color: #fff; }
+    .btn-primary:hover { background: #e6451c; }
+    .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn-secondary { background: #f3f4f6; color: #333; border: 1px solid #ddd; }
+    .hint { font-size: 0.78rem; color: #888; margin-top: 6px; }
+    .result {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      word-break: break-all;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      display: none;
+    }
+    .result.show { display: block; }
+    .result.error { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+    .meta { font-size: 0.78rem; color: #666; margin-top: 8px; }
+    .warn-box {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.82rem;
+      color: #9a3412;
+      margin-top: 12px;
+    }
+    code { background: #f3f4f6; padding: 1px 5px; border-radius: 4px; font-size: 0.85em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>派件异常催取 — 激活码生成</h1>
+    <p class="subtitle">短码约 95 字符，复制粘贴即可；与插件 Ed25519 公钥验签一致</p>
+
+    <div class="card">
+      <h2>使用流程</h2>
+      <ol class="steps">
+        <li>用户在插件锁定页复制 <strong>8 位凭证号</strong> 发给你。</li>
+        <li>选择私钥文件，输入凭证号，点击「生成激活码」。</li>
+        <li>复制短激活码发给用户，在插件粘贴激活。</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <label for="credentialId">用户凭证号（8 位）</label>
+      <input type="text" id="credentialId" maxlength="32" placeholder="例如 1999CF24" autocomplete="off" spellcheck="false">
+      <p class="hint">格式：<code>凭证号-签名</code>，总长约 95 字符（旧 RSA 码约 350 字符，已废弃）</p>
+
+      <label for="privateKeyFile" style="margin-top:14px;">私钥文件</label>
+      <input type="file" id="privateKeyFile" accept=".pem,.key,text/plain">
+      <p class="hint">选择 <code>scripts/du_license_ed25519_private.pem</code>，仅在本地浏览器签名，不会上传。</p>
+
+      <div class="row">
+        <button type="button" class="btn-primary" id="generateBtn">生成激活码</button>
+        <button type="button" class="btn-secondary" id="copyBtn" hidden>复制激活码</button>
+      </div>
+
+      <div class="result" id="resultBox"></div>
+      <p class="meta" id="metaLine" hidden></p>
+
+      <div class="warn-box">
+        插件内只含 Ed25519 公钥，无法伪造。私钥切勿放入插件或发给用户。
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>命令行方式（可选）</h2>
+      <p class="hint" style="margin-top:0">
+        <code>python3 scripts/generate_du_activation_code.py 1999CF24</code>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const DU_CREDENTIAL_LEN = 8;
+      const DU_ED25519_PUBLIC_SPKI_B64 =
+        "MCowBQYDK2VwAyEAZWFJ1wWi8cSTrC/NlCSpGnq+pzi5oU4+iFvv/09yOuM=";
+
+      let privateKeyPem = "";
+      let cachedPrivateKey = null;
+      let cachedPublicKey = null;
+      let lastActivationCode = "";
+
+      const credentialInput = document.getElementById("credentialId");
+      const privateKeyFile = document.getElementById("privateKeyFile");
+      const generateBtn = document.getElementById("generateBtn");
+      const copyBtn = document.getElementById("copyBtn");
+      const resultBox = document.getElementById("resultBox");
+      const metaLine = document.getElementById("metaLine");
+
+      function normalizeCredentialId(raw) {
+        const v = String(raw || "").trim().toUpperCase();
+        if (v.length < DU_CREDENTIAL_LEN) throw new Error("凭证号至少 " + DU_CREDENTIAL_LEN + " 位");
+        return v.slice(0, DU_CREDENTIAL_LEN);
+      }
+
+      function pemToArrayBuffer(pem) {
+        const b64 = pem.replace(/-----[^-]+-----/g, "").replace(/\s+/g, "");
+        const bin = atob(b64);
+        const out = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+        return out.buffer;
+      }
+
+      function toBase64Url(bytes) {
+        let bin = "";
+        bytes.forEach(function (b) { bin += String.fromCharCode(b); });
+        return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+      }
+
+      function decodeActivationSignature(token) {
+        const normalized = String(token || "").trim().replace(/\s+/g, "");
+        const b64 = normalized.replace(/-/g, "+").replace(/_/g, "/");
+        const pad = b64.length % 4 ? "=".repeat(4 - (b64.length % 4)) : "";
+        const bin = atob(b64 + pad);
+        return Uint8Array.from(bin, function (c) { return c.charCodeAt(0); });
+      }
+
+      async function getPublicKey() {
+        if (cachedPublicKey) return cachedPublicKey;
+        const spki = Uint8Array.from(atob(DU_ED25519_PUBLIC_SPKI_B64), function (c) { return c.charCodeAt(0); });
+        cachedPublicKey = await crypto.subtle.importKey("spki", spki, { name: "Ed25519" }, false, ["verify"]);
+        return cachedPublicKey;
+      }
+
+      async function getPrivateKey() {
+        if (cachedPrivateKey) return cachedPrivateKey;
+        if (!privateKeyPem) throw new Error("请先选择私钥文件");
+        cachedPrivateKey = await crypto.subtle.importKey(
+          "pkcs8",
+          pemToArrayBuffer(privateKeyPem),
+          { name: "Ed25519" },
+          false,
+          ["sign"]
+        );
+        return cachedPrivateKey;
+      }
+
+      async function signCredential(credentialId) {
+        const key = await getPrivateKey();
+        const sig = await crypto.subtle.sign(
+          { name: "Ed25519" },
+          key,
+          new TextEncoder().encode(credentialId)
+        );
+        return credentialId + "-" + toBase64Url(new Uint8Array(sig));
+      }
+
+      async function verifyCode(credentialId, code) {
+        const dash = code.indexOf("-");
+        if (dash <= 0) return false;
+        const cred = code.slice(0, dash);
+        const token = code.slice(dash + 1);
+        if (cred !== credentialId) return false;
+        const key = await getPublicKey();
+        return crypto.subtle.verify(
+          { name: "Ed25519" },
+          key,
+          decodeActivationSignature(token),
+          new TextEncoder().encode(credentialId)
+        );
+      }
+
+      function showResult(code) {
+        lastActivationCode = code;
+        resultBox.textContent = code;
+        resultBox.className = "result show";
+        metaLine.hidden = false;
+        metaLine.textContent = "长度 " + code.length + " 字符（约比旧版 RSA 短 75%）";
+        copyBtn.hidden = false;
+      }
+
+      function showError(msg) {
+        lastActivationCode = "";
+        resultBox.textContent = msg;
+        resultBox.className = "result show error";
+        metaLine.hidden = true;
+        copyBtn.hidden = true;
+      }
+
+      async function handleGenerate() {
+        generateBtn.disabled = true;
+        try {
+          if (!crypto.subtle) throw new Error("当前浏览器不支持 Web Crypto，请使用 Chrome 最新版");
+          const credentialId = normalizeCredentialId(credentialInput.value);
+          credentialInput.value = credentialId;
+          const code = await signCredential(credentialId);
+          if (!(await verifyCode(credentialId, code))) {
+            throw new Error("本地验签失败，请检查私钥是否正确");
+          }
+          showResult(code);
+        } catch (err) {
+          showError(String(err.message || err));
+        } finally {
+          generateBtn.disabled = false;
+        }
+      }
+
+      async function handleCopy() {
+        if (!lastActivationCode) return;
+        try {
+          await navigator.clipboard.writeText(lastActivationCode);
+          copyBtn.textContent = "已复制";
+          setTimeout(function () { copyBtn.textContent = "复制激活码"; }, 1500);
+        } catch (_e) {
+          prompt("请手动复制：", lastActivationCode);
+        }
+      }
+
+      privateKeyFile.addEventListener("change", function () {
+        const file = privateKeyFile.files && privateKeyFile.files[0];
+        if (!file) return;
+        cachedPrivateKey = null;
+        const reader = new FileReader();
+        reader.onload = function () {
+          privateKeyPem = String(reader.result || "");
+        };
+        reader.readAsText(file);
+      });
+
+      generateBtn.addEventListener("click", handleGenerate);
+      copyBtn.addEventListener("click", handleCopy);
+      credentialInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") handleGenerate();
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopee批量定价器</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.5;
+      padding: 12px;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      text-align: center;
+      color: #ee4d2d;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+      background: #fff;
+      padding: 4px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .nav-tabs button {
+      flex: 1;
+      padding: 10px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: #666;
+      cursor: pointer;
+    }
+
+    .nav-tabs button.active {
+      background: #ee4d2d;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .panel {
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #555;
+    }
+
+    input[type="number"],
+    input[type="text"].inp-text {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: #fafafa;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #ee4d2d;
+      background: #fff;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .input-group input { flex: 1; }
+    .input-group span { font-size: 0.82rem; color: #666; white-space: nowrap; }
+
+    button {
+      padding: 9px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary { background: #ee4d2d; color: #fff; }
+    .btn-primary:hover { background: #d73211; }
+    .btn-secondary { background: #fff; color: #ee4d2d; border: 1px solid #ee4d2d; }
+    .btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-ghost { background: #f0f2f5; color: #555; }
+    .btn-ghost:hover { background: #e4e6e9; }
+    .btn-icon {
+      padding: 4px 10px;
+      background: transparent;
+      color: #999;
+      border: 1px solid #ddd;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+    .btn-icon:hover { color: #c0392b; border-color: #c0392b; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+    .message { font-size: 0.85rem; min-height: 1.2em; margin-top: 8px; }
+    .message.error { color: #c0392b; }
+    .message.success { color: #27ae60; }
+    .message.warn { color: #d68910; }
+
+    .fx-bar {
+      background: linear-gradient(135deg, #fff8f6 0%, #fff 100%);
+      border: 1px solid #ffe0d6;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+
+    .fx-bar h3 { margin: 0 0 8px; font-size: 0.9rem; color: #ee4d2d; }
+
+    .fx-rates {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 6px;
+      font-size: 0.86rem;
+    }
+
+    .fx-rates .readonly {
+      padding: 8px 10px;
+      background: #f5f5f5;
+      border-radius: 6px;
+      border: 1px solid #eee;
+    }
+
+    .fx-meta {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: #888;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .fx-meta .btn-ghost { padding: 6px 12px; font-size: 0.8rem; }
+
+    .global-config {
+      margin-bottom: 14px;
+      padding: 10px 12px;
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      max-width: 280px;
+    }
+
+    .site-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    .site-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px;
+      background: #fafafa;
+    }
+
+    .site-card.ph { border-top: 3px solid #0038a8; }
+    .site-card.my { border-top: 3px solid #ee4d2d; }
+    .site-card.th { border-top: 3px solid #2e7d32; }
+    .site-card.sg { border-top: 3px solid #c41e3a; }
+
+    .site-card h3 { margin: 0 0 8px; font-size: 0.95rem; }
+    .site-card .field { margin-bottom: 8px; }
+
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      min-width: 780px;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      border: 1px solid #ddd;
+      padding: 8px 6px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .pricing-table thead th {
+      background: #f0f2f5;
+      font-weight: 600;
+      color: #444;
+      white-space: nowrap;
+    }
+
+    .pricing-table tbody tr:nth-child(even) { background: #fafafa; }
+
+    .pricing-table td input.inp-text,
+    .pricing-table .batch-field input {
+      width: 100%;
+      min-width: 64px;
+      padding: 6px 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.88rem;
+      text-align: right;
+      background: #fff;
+    }
+
+    .th-batch-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 100px;
+    }
+
+    .th-batch-wrap .th-label { font-size: 0.84rem; }
+
+    .batch-field {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      width: 100%;
+    }
+
+    .batch-field input {
+      flex: 1;
+      min-width: 48px;
+      padding: 4px 6px;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .btn-batch {
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      background: #ee4d2d;
+      color: #fff;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .btn-batch:hover { background: #d73211; }
+
+    .pricing-table .col-idx { width: 32px; color: #999; }
+    .pricing-table .col-del { width: 36px; }
+
+    .pricing-table .price-cell { padding: 6px 4px; }
+
+    .price-cell-inner {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .pricing-table .out-price {
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      cursor: help;
+      white-space: nowrap;
+      flex: 1;
+      min-width: 0;
+      text-align: right;
+    }
+
+    .pricing-table .out-price.ph { color: #0038a8; }
+    .pricing-table .out-price.my { color: #ee4d2d; }
+    .pricing-table .out-price.th { color: #2e7d32; }
+    .pricing-table .out-price.sg { color: #c41e3a; }
+
+    .pricing-table .out-price.empty { color: #ccc; font-weight: 400; cursor: default; }
+    .pricing-table .out-price.error {
+      color: #c0392b;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: normal;
+      flex: 1;
+    }
+
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      padding: 0;
+      background: #f0f2f5;
+      color: #666;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .btn-copy svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .btn-copy:hover:not(:disabled) {
+      background: #ee4d2d;
+      color: #fff;
+      border-color: #ee4d2d;
+    }
+
+    .btn-copy:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .btn-copy.copied {
+      background: #27ae60;
+      color: #fff;
+      border-color: #27ae60;
+    }
+
+    .table-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .table-toolbar span { font-size: 0.85rem; color: #666; }
+
+    .formula { font-size: 0.76rem; color: #888; line-height: 1.65; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Shopee批量定价器</h1>
+
+    <nav class="nav-tabs">
+      <button type="button" class="tab-btn active" data-tab="pricing">批量定价</button>
+      <button type="button" class="tab-btn" data-tab="config">站点配置</button>
+    </nav>
+
+    <div id="page-pricing" class="page active">
+      <div class="panel">
+        <div class="table-toolbar">
+          <span>填写成本、预估利润、重量后点击计算；表头可批量设置预估利润与重量</span>
+          <button type="button" class="btn-ghost" id="addRowBtn">+ 添加一行</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th class="col-idx">#</th>
+                <th>成本价(CNY)</th>
+                <th>
+                  <div class="th-batch-wrap">
+                    <span class="th-label">预估利润(CNY)</span>
+                    <div class="batch-field">
+                      <input type="text" id="batchProfitInput" class="inp-text" placeholder="批量" inputmode="decimal" autocomplete="off">
+                      <button type="button" class="btn-batch" id="batchProfitBtn" title="应用到所有行">应用</button>
+                    </div>
+                  </div>
+                </th>
+                <th>
+                  <div class="th-batch-wrap">
+                    <span class="th-label">重量(g)</span>
+                    <div class="batch-field">
+                      <input type="text" id="batchWeightInput" class="inp-text" placeholder="批量" inputmode="decimal" autocomplete="off">
+                      <button type="button" class="btn-batch" id="batchWeightBtn" title="应用到所有行">应用</button>
+                    </div>
+                  </div>
+                </th>
+                <th>菲律宾 ₱</th>
+                <th>马来西亚 RM</th>
+                <th>泰国 ฿</th>
+                <th>新加坡 S$</th>
+                <th class="col-del"></th>
+              </tr>
+            </thead>
+            <tbody id="productRows"></tbody>
+          </table>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn-primary" id="calcBtn">计算售价</button>
+          <button type="button" class="btn-secondary" id="exportBtn" disabled>导出 CSV</button>
+        </div>
+        <div class="message" id="pricingMessage"></div>
+      </div>
+
+      <p class="formula panel">
+        基础成本 = (成本+利润+境内运费)×汇率 + 藏价运费；售价 = [基础成本 + 买家运费×交易费率] ÷ [1−(交易+佣金+活动+提现+技术支持)费率]；
+        所有金额保留两位小数；交易手续费 = (售价+买家运费)×交易费率。
+      </p>
+    </div>
+
+    <div id="page-config" class="page">
+      <div class="panel">
+        <div class="fx-bar">
+          <h3>实时汇率（1 CNY =，只读）</h3>
+          <div class="fx-rates" id="fxRatesDisplay">加载中…</div>
+          <div class="fx-meta">
+            <span id="fxUpdatedAt">—</span>
+            <button type="button" class="btn-ghost" id="refreshFxBtn">刷新汇率</button>
+          </div>
+          <div class="message" id="fxMessage"></div>
+        </div>
+
+        <div class="global-config">
+          <label for="domesticShipping">境内段运费 (CNY)</label>
+          <input type="number" id="domesticShipping" value="1.2" min="0" step="0.01">
+        </div>
+
+        <div class="site-cards" id="siteCards"></div>
+
+        <div class="actions">
+          <button type="button" class="btn-primary" id="saveConfigBtn">保存配置</button>
+          <button type="button" class="btn-ghost" id="resetConfigBtn">恢复默认</button>
+        </div>
+        <div class="message" id="configMessage"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="extension/js/cost-pricing-data.js"></script>
+  <script>
+    const STORAGE = {
+      sites: "shopee_sites_v4",
+      rates: "shopee_fx_rates_v4",
+      tab: "shopee_active_tab",
+    };
+
+    const FX_API = "https://open.er-api.com/v6/latest/CNY";
+
+    const SITES = [
+      { id: "PH", name: "菲律宾", css: "ph", currency: "PHP", symbol: "₱", rateKey: "PHP" },
+      { id: "MY", name: "马来西亚", css: "my", currency: "MYR", symbol: "RM", rateKey: "MYR" },
+      { id: "TH", name: "泰国", css: "th", currency: "THB", symbol: "฿", rateKey: "THB" },
+      { id: "SG", name: "新加坡", css: "sg", currency: "SGD", symbol: "S$", rateKey: "SGD" },
+    ];
+
+    const DEFAULT_SITES = {
+      domesticShipping: 1.2,
+      PH: { commission: 12, transaction: 2.24, activity: 9, withdrawal: 1, techSupport: 0 },
+      MY: { commission: 18.36, transaction: 3.78, activity: 5, withdrawal: 1, techSupport: 6 },
+      TH: { commission: 18.19, transaction: 3.21, activity: 7, withdrawal: 1, techSupport: 6 },
+      SG: { commission: 16, transaction: 3, activity: 5, withdrawal: 1, techSupport: 5 },
+    };
+
+    const DEFAULT_FX = { PHP: 8.0, MYR: 0.65, THB: 5.0, SGD: 0.19, updatedAt: null, fromApi: false };
+
+    let lastExportData = [];
+
+    function loadJSON(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function saveJSON(key, data) {
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    function showMsg(id, text, type) {
+      const el = document.getElementById(id);
+      el.textContent = text;
+      el.className = "message" + (type ? " " + type : "");
+    }
+
+    /** 金额保留两位小数 */
+    function round2(n) {
+      return Math.round(n * 100) / 100;
+    }
+
+    function fmtMoney(n) {
+      return round2(n).toFixed(2);
+    }
+
+    /** 运费计费重量：空或0按1g */
+    function weightForShipping(weightG) {
+      if (weightG === "" || weightG == null || isNaN(weightG) || weightG <= 0) return 1;
+      return weightG;
+    }
+
+    /** 按首重/续重阶梯计算运费（当地货币）；无续重时为固定费用 */
+    function calculateTieredFreight(weightG, tiers) {
+      if (!tiers || tiers.basePrice == null || isNaN(tiers.basePrice)) return 0;
+      const w = weightForShipping(weightG);
+      const baseWeight = Number(tiers.baseWeight) || 0;
+      const basePrice = Number(tiers.basePrice) || 0;
+      const stepWeight = Number(tiers.stepWeight) || 0;
+      const stepPrice = Number(tiers.stepPrice) || 0;
+      if (!stepWeight || !stepPrice) return round2(basePrice);
+      if (w <= baseWeight) return round2(basePrice);
+      return round2(basePrice + Math.ceil((w - baseWeight) / stepWeight) * stepPrice);
+    }
+
+    function resolveDefaultSiteChannel(siteId) {
+      const data = typeof COST_PRICING_SITE_DATA !== "undefined" ? COST_PRICING_SITE_DATA : null;
+      if (!data || !data[siteId]) return null;
+      const cargoOrder = ["普货", "重货", "特货", "大件"];
+      const cargoTypes = data[siteId].cargoTypes || {};
+      for (let i = 0; i < cargoOrder.length; i++) {
+        const channels = cargoTypes[cargoOrder[i]];
+        if (!channels) continue;
+        const keys = Object.keys(channels);
+        if (!keys.length) continue;
+        const standard = keys.find(function (k) { return /标准|standard/i.test(k); });
+        return channels[standard || keys[0]];
+      }
+      return null;
+    }
+
+    /** 跨境物流成本（藏价，卖家支出，当地货币） */
+    function calculateSellerShipping(weightG, siteId) {
+      const channel = resolveDefaultSiteChannel(siteId);
+      if (channel) return calculateTieredFreight(weightG, channel);
+      return 0;
+    }
+
+    /** 买家支付运费（当地货币） */
+    function calculateBuyerShipping(weightG, siteId, channelConfig) {
+      const channel = channelConfig || resolveDefaultSiteChannel(siteId);
+      if (!channel) return 0;
+      return calculateTieredFreight(weightG, {
+        baseWeight: channel.buyerBaseWeight,
+        basePrice: channel.buyerBasePrice,
+        stepWeight: channel.buyerStepWeight,
+        stepPrice: channel.buyerStepPrice,
+      });
+    }
+
+    function getSitesConfig() {
+      const saved = loadJSON(STORAGE.sites, null);
+      if (!saved) return JSON.parse(JSON.stringify(DEFAULT_SITES));
+      return {
+        domesticShipping: saved.domesticShipping ?? DEFAULT_SITES.domesticShipping,
+        PH: { ...DEFAULT_SITES.PH, ...saved.PH },
+        MY: { ...DEFAULT_SITES.MY, ...saved.MY },
+        TH: { ...DEFAULT_SITES.TH, ...saved.TH },
+        SG: { ...DEFAULT_SITES.SG, ...saved.SG },
+      };
+    }
+
+    function getFxRates() {
+      return { ...DEFAULT_FX, ...loadJSON(STORAGE.rates, DEFAULT_FX) };
+    }
+
+    function isSiteConfigured(site) {
+      return ["commission", "transaction", "activity", "withdrawal", "techSupport"].every((f) => {
+        const v = site[f];
+        return v !== "" && v != null && !isNaN(Number(v)) && Number(v) >= 0;
+      });
+    }
+
+    function buildSiteConfig(siteId, sitesData, fxRates) {
+      const site = sitesData[siteId];
+      return {
+        site: siteId,
+        commission: Number(site.commission),
+        transactionFee: Number(site.transaction),
+        activityFee: Number(site.activity),
+        withdrawalFee: Number(site.withdrawal),
+        techSupportFee: Number(site.techSupport ?? 0),
+        domesticShipping: Number(sitesData.domesticShipping),
+        exchangeRate: fxRates[SITES.find((s) => s.id === siteId).rateKey],
+      };
+    }
+
+    function calculateRow(cost, weight, profit, siteMeta, siteConfig) {
+      if (!isSiteConfigured({
+        commission: siteConfig.commission,
+        transaction: siteConfig.transactionFee,
+        activity: siteConfig.activityFee,
+        withdrawal: siteConfig.withdrawalFee,
+        techSupport: siteConfig.techSupportFee,
+      })) {
+        return { error: "请先配置费率" };
+      }
+
+      const otherRate =
+        siteConfig.commission + siteConfig.activityFee + siteConfig.withdrawalFee +
+        siteConfig.techSupportFee;
+      const transactionRate = siteConfig.transactionFee;
+      const denominatorRate = transactionRate + otherRate;
+
+      if (denominatorRate >= 100) {
+        return { error: "费率过高" };
+      }
+
+      if (!siteConfig.exchangeRate || siteConfig.exchangeRate <= 0) {
+        return { error: "汇率无效" };
+      }
+
+      const shippingSeller = calculateSellerShipping(weight, siteConfig.site);
+      const shippingBuyer = calculateBuyerShipping(weight, siteConfig.site);
+      const shippingSellerCNY = round2(shippingSeller / siteConfig.exchangeRate);
+      const shippingBuyerCNY = round2(shippingBuyer / siteConfig.exchangeRate);
+
+      const baseCost = round2(
+        (cost + profit + siteConfig.domesticShipping) * siteConfig.exchangeRate +
+          shippingSeller
+      );
+
+      const numerator = round2(baseCost + shippingBuyer * (transactionRate / 100));
+      const denominator = 1 - denominatorRate / 100;
+      const priceLocal = round2(numerator / denominator);
+
+      const commissionFee = round2(priceLocal * (siteConfig.commission / 100));
+      const transactionFeeAmount = round2(
+        (priceLocal + shippingBuyer) * (transactionRate / 100)
+      );
+      const activityFeeAmount = round2(priceLocal * (siteConfig.activityFee / 100));
+      const withdrawalFeeAmount = round2(priceLocal * (siteConfig.withdrawalFee / 100));
+      const techSupportFeeAmount = round2(priceLocal * (siteConfig.techSupportFee / 100));
+      const totalFee = round2(
+        commissionFee + transactionFeeAmount + activityFeeAmount + withdrawalFeeAmount +
+        techSupportFeeAmount
+      );
+
+      const verify = round2(
+        baseCost +
+          priceLocal * (otherRate / 100) +
+          (priceLocal + shippingBuyer) * (transactionRate / 100)
+      );
+
+      const orderIncome = round2(priceLocal - totalFee - shippingSeller);
+      const priceCNY = round2(priceLocal / siteConfig.exchangeRate);
+      const netProfitCNY = round2(
+        orderIncome / siteConfig.exchangeRate - cost - siteConfig.domesticShipping
+      );
+
+      const anomaly = Math.abs(verify - priceLocal) > 0.02;
+
+      return {
+        priceLocal,
+        priceCNY,
+        shippingSeller,
+        shippingBuyer,
+        shippingSellerCNY,
+        shippingBuyerCNY,
+        baseCost,
+        numerator,
+        denominator,
+        commissionFee,
+        transactionFeeAmount,
+        activityFeeAmount,
+        withdrawalFeeAmount,
+        techSupportFeeAmount,
+        totalFee,
+        orderIncome,
+        verify,
+        netProfitCNY,
+        otherRate,
+        transactionRate,
+        denominatorRate,
+        anomaly,
+        inputProfit: profit,
+        cost,
+        domesticShipping: siteConfig.domesticShipping,
+        billingWeight: weightForShipping(weight),
+        symbol: siteMeta.symbol,
+        commissionPct: siteConfig.commission,
+        transactionPct: transactionRate,
+        activityPct: siteConfig.activityFee,
+        withdrawalPct: siteConfig.withdrawalFee,
+        techSupportPct: siteConfig.techSupportFee,
+      };
+    }
+
+    function buildTooltip(r, siteMeta) {
+      const sym = siteMeta.symbol;
+      const lines = [
+        `售价: ${sym}${fmtMoney(r.priceLocal)} (¥${fmtMoney(r.priceCNY)})`,
+        `├─ 成本价: ¥${fmtMoney(r.cost)}`,
+        `├─ 预估利润: ¥${fmtMoney(r.inputProfit)}`,
+        `├─ 境内段运费: ¥${fmtMoney(r.domesticShipping)}`,
+        `├─ 跨境物流成本(藏价): ${sym}${fmtMoney(r.shippingSeller)} (¥${fmtMoney(r.shippingSellerCNY)})`,
+        `├─ 买家支付运费: ${sym}${fmtMoney(r.shippingBuyer)} (¥${fmtMoney(r.shippingBuyerCNY)})`,
+        `├─ 基础成本: ${sym}${fmtMoney(r.baseCost)}`,
+        `├─ 订单收入: ${sym}${fmtMoney(r.orderIncome)} (售价−平台费用−藏价)`,
+        `├─ 解方程: (${sym}${fmtMoney(r.baseCost)} + ${sym}${fmtMoney(r.shippingBuyer)}×${r.transactionPct}%) ÷ ${(100 - r.denominatorRate).toFixed(2)}% = ${sym}${fmtMoney(r.priceLocal)}`,
+        `├─ 平台费用: ${sym}${fmtMoney(r.totalFee)}`,
+        `│   ├─ 佣金 (${r.commissionPct}%): ${sym}${fmtMoney(r.commissionFee)}`,
+        `│   ├─ 交易手续费 (${r.transactionPct}%): ${sym}${fmtMoney(r.transactionFeeAmount)} (基于售价+买家运费)`,
+        `│   ├─ 活动服务费 (${r.activityPct}%): ${sym}${fmtMoney(r.activityFeeAmount)}`,
+        `│   ├─ 提现手续费 (${r.withdrawalPct}%): ${sym}${fmtMoney(r.withdrawalFeeAmount)}`,
+        `│   └─ 技术支持 (${r.techSupportPct}%): ${sym}${fmtMoney(r.techSupportFeeAmount)}`,
+        `├─ 验证(方程): ${sym}${fmtMoney(r.verify)}`,
+        `└─ 净利润: ¥${fmtMoney(r.netProfitCNY)}`,
+      ];
+      if (r.anomaly) lines.push("⚠ 计算异常：验证值与售价偏差>0.02");
+      return lines.join("\n");
+    }
+
+    function escapeAttr(s) {
+      return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    }
+
+    /* ========== 导航 ========== */
+    function switchTab(tab) {
+      document.querySelectorAll(".tab-btn").forEach((b) =>
+        b.classList.toggle("active", b.dataset.tab === tab)
+      );
+      document.querySelectorAll(".page").forEach((p) =>
+        p.classList.toggle("active", p.id === "page-" + tab)
+      );
+      localStorage.setItem(STORAGE.tab, tab);
+    }
+
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+    });
+
+    /* ========== 站点配置 ========== */
+    function renderSiteCards() {
+      const cfg = getSitesConfig();
+      document.getElementById("domesticShipping").value = cfg.domesticShipping;
+
+      document.getElementById("siteCards").innerHTML = SITES.map((s) => {
+        const c = cfg[s.id];
+        return `
+          <div class="site-card ${s.css}">
+            <h3>${s.name}</h3>
+            <div class="field">
+              <label>佣金费率 (%)</label>
+              <input type="number" data-site="${s.id}" data-field="commission" value="${c.commission}" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>交易手续费 (%)</label>
+              <input type="number" data-site="${s.id}" data-field="transaction" value="${c.transaction}" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>活动服务费 (%)</label>
+              <input type="number" data-site="${s.id}" data-field="activity" value="${c.activity}" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>提现手续费 (%)</label>
+              <input type="number" data-site="${s.id}" data-field="withdrawal" value="${c.withdrawal}" min="0" step="0.01">
+            </div>
+            <div class="field">
+              <label>技术支持 (%)</label>
+              <input type="number" data-site="${s.id}" data-field="techSupport" value="${c.techSupport ?? 0}" min="0" step="0.01">
+            </div>
+          </div>`;
+      }).join("");
+    }
+
+    function readConfigFromDOM() {
+      const config = {
+        domesticShipping: parseFloat(document.getElementById("domesticShipping").value),
+      };
+      SITES.forEach((s) => {
+        config[s.id] = {};
+        document.querySelectorAll(`[data-site="${s.id}"][data-field]`).forEach((inp) => {
+          config[s.id][inp.dataset.field] = parseFloat(inp.value);
+        });
+      });
+      return config;
+    }
+
+    document.getElementById("saveConfigBtn").addEventListener("click", () => {
+      saveJSON(STORAGE.sites, readConfigFromDOM());
+      showMsg("configMessage", "已保存", "success");
+    });
+
+    document.getElementById("resetConfigBtn").addEventListener("click", () => {
+      if (!confirm("确定恢复默认配置？")) return;
+      saveJSON(STORAGE.sites, JSON.parse(JSON.stringify(DEFAULT_SITES)));
+      renderSiteCards();
+      showMsg("configMessage", "已恢复默认配置", "success");
+    });
+
+    /* ========== 汇率 ========== */
+    function renderFxDisplay(fx) {
+      document.getElementById("fxRatesDisplay").innerHTML = SITES.map((s) => {
+        const val = fx[s.rateKey];
+        return `<div class="readonly"><label>${s.name} (${s.currency})</label>1 CNY = <strong>${Number(val).toFixed(4)}</strong> ${s.currency}</div>`;
+      }).join("");
+
+      const at = fx.updatedAt ? new Date(fx.updatedAt).toLocaleString("zh-CN") : "—";
+      const src = fx.fromApi ? "API 实时" : "上次保存";
+      document.getElementById("fxUpdatedAt").textContent = `更新时间：${at}（${src}）`;
+    }
+
+    async function fetchExchangeRates() {
+      const btn = document.getElementById("refreshFxBtn");
+      btn.disabled = true;
+      showMsg("fxMessage", "正在获取汇率…", "");
+
+      try {
+        const res = await fetch(FX_API);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        if (data.result !== "success" || !data.rates) throw new Error("无效响应");
+
+        const fx = {
+          PHP: data.rates.PHP,
+          MYR: data.rates.MYR,
+          THB: data.rates.THB,
+          SGD: data.rates.SGD,
+          updatedAt: (data.time_last_update_unix || Date.now() / 1000) * 1000,
+          fromApi: true,
+        };
+        saveJSON(STORAGE.rates, fx);
+        renderFxDisplay(fx);
+        showMsg("fxMessage", "", "");
+        return fx;
+      } catch {
+        const cached = getFxRates();
+        renderFxDisplay(cached);
+        showMsg("fxMessage", "获取失败，使用上次保存值", "warn");
+        return cached;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    document.getElementById("refreshFxBtn").addEventListener("click", fetchExchangeRates);
+
+    const COPY_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+
+    /* ========== 定价表格 ========== */
+    function createRow(cost = "", profit = "", weight = "") {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="col-idx"></td>
+        <td><input type="text" class="inp-text inp-cost" placeholder="0" inputmode="decimal" autocomplete="off" value="${cost}"></td>
+        <td><input type="text" class="inp-text inp-profit" placeholder="0" inputmode="decimal" autocomplete="off" value="${profit}"></td>
+        <td><input type="text" class="inp-text inp-weight" placeholder="0" inputmode="decimal" autocomplete="off" value="${weight}"></td>
+        ${SITES.map(
+          (s) => `
+        <td class="price-cell" data-site="${s.id}">
+          <div class="price-cell-inner">
+            <span class="out-price ${s.css} empty">—</span>
+            <button type="button" class="btn-copy" disabled title="复制售价" aria-label="复制售价">${COPY_ICON}</button>
+          </div>
+        </td>`
+        ).join("")}
+        <td class="col-del"><button type="button" class="btn-icon btn-del" title="删除">×</button></td>
+      `;
+      tr.querySelector(".btn-del").addEventListener("click", () => {
+        tr.remove();
+        reindexRows();
+      });
+      return tr;
+    }
+
+    function reindexRows() {
+      document.querySelectorAll("#productRows tr").forEach((tr, i) => {
+        tr.querySelector(".col-idx").textContent = i + 1;
+      });
+    }
+
+    function addRow(cost = "", profit = "", weight = "") {
+      const batchP = document.getElementById("batchProfitInput").value.trim();
+      const batchW = document.getElementById("batchWeightInput").value.trim();
+      const p =
+        profit !== ""
+          ? profit
+          : batchP && !isNaN(parseFloat(batchP)) && parseFloat(batchP) >= 0
+            ? batchP
+            : "";
+      const w =
+        weight !== ""
+          ? weight
+          : batchW && !isNaN(parseFloat(batchW)) && parseFloat(batchW) >= 0
+            ? batchW
+            : "";
+      document.getElementById("productRows").appendChild(createRow(cost, p, w));
+      reindexRows();
+    }
+
+    function applyBatchProfit() {
+      const val = document.getElementById("batchProfitInput").value.trim();
+      if (val === "") {
+        showMsg("pricingMessage", "请在表头输入批量预估利润", "error");
+        return;
+      }
+      const p = parseFloat(val);
+      if (isNaN(p) || p < 0) {
+        showMsg("pricingMessage", "批量预估利润无效", "error");
+        return;
+      }
+      const rows = document.querySelectorAll("#productRows .inp-profit");
+      if (rows.length === 0) {
+        showMsg("pricingMessage", "请先添加商品行", "error");
+        return;
+      }
+      rows.forEach((inp) => {
+        inp.value = val;
+      });
+      showMsg("pricingMessage", `已将 ${rows.length} 行预估利润设为 ${val}`, "success");
+    }
+
+    function applyBatchWeight() {
+      const val = document.getElementById("batchWeightInput").value.trim();
+      if (val === "") {
+        showMsg("pricingMessage", "请在表头输入批量重量", "error");
+        return;
+      }
+      const w = parseFloat(val);
+      if (isNaN(w) || w < 0) {
+        showMsg("pricingMessage", "批量重量无效", "error");
+        return;
+      }
+      const rows = document.querySelectorAll("#productRows .inp-weight");
+      if (rows.length === 0) {
+        showMsg("pricingMessage", "请先添加商品行", "error");
+        return;
+      }
+      rows.forEach((inp) => {
+        inp.value = val;
+      });
+      showMsg("pricingMessage", `已将 ${rows.length} 行重量设为 ${val}g`, "success");
+    }
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.cssText = "position:fixed;left:-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        return ok;
+      }
+    }
+
+    function flashCopyBtn(btn) {
+      btn.classList.add("copied");
+      setTimeout(() => btn.classList.remove("copied"), 800);
+    }
+
+    function setPriceCell(td, result, siteMeta) {
+      const priceEl = td.querySelector(".out-price");
+      const copyBtn = td.querySelector(".btn-copy");
+
+      priceEl.className = `out-price ${siteMeta.css}`;
+      copyBtn.disabled = true;
+      delete copyBtn.dataset.copyText;
+
+      if (result.error) {
+        priceEl.textContent = result.error;
+        priceEl.classList.add("error");
+        priceEl.removeAttribute("title");
+        return;
+      }
+
+      if (result.anomaly) {
+        priceEl.textContent = "计算异常";
+        priceEl.classList.add("error");
+        priceEl.title = buildTooltip(result, siteMeta);
+        return;
+      }
+
+      const display = `${siteMeta.symbol}${fmtMoney(result.priceLocal)}`;
+      const copyValue = fmtMoney(result.priceLocal);
+
+      priceEl.textContent = display;
+      priceEl.title = buildTooltip(result, siteMeta);
+      priceEl.classList.remove("empty", "error");
+
+      copyBtn.disabled = false;
+      copyBtn.dataset.copyText = copyValue;
+      copyBtn.title = `复制 ${display}`;
+    }
+
+    function clearRowPrices(tr) {
+      SITES.forEach((s) => {
+        const td = tr.querySelector(`.price-cell[data-site="${s.id}"]`);
+        const priceEl = td.querySelector(".out-price");
+        const copyBtn = td.querySelector(".btn-copy");
+        priceEl.textContent = "—";
+        priceEl.className = `out-price ${s.css} empty`;
+        priceEl.removeAttribute("title");
+        copyBtn.disabled = true;
+        copyBtn.classList.remove("copied");
+        delete copyBtn.dataset.copyText;
+      });
+    }
+
+    function collectRows() {
+      const items = [];
+      const errors = [];
+
+      document.querySelectorAll("#productRows tr").forEach((tr, index) => {
+        const costStr = tr.querySelector(".inp-cost").value.trim();
+        const profitStr = tr.querySelector(".inp-profit").value.trim();
+        const weightStr = tr.querySelector(".inp-weight").value.trim();
+
+        if (!costStr && !profitStr && !weightStr) return;
+
+        if (!costStr) {
+          errors.push(`第 ${index + 1} 行：请填写成本价`);
+          return;
+        }
+        if (!profitStr) {
+          errors.push(`第 ${index + 1} 行：请填写预估利润`);
+          return;
+        }
+
+        const cost = parseFloat(costStr);
+        const profit = parseFloat(profitStr);
+        const weight = weightStr === "" ? 0 : parseFloat(weightStr);
+
+        if (isNaN(cost) || cost < 0) {
+          errors.push(`第 ${index + 1} 行：成本价无效`);
+          return;
+        }
+        if (isNaN(profit) || profit < 0) {
+          errors.push(`第 ${index + 1} 行：预估利润无效`);
+          return;
+        }
+        if (weightStr !== "" && (isNaN(weight) || weight < 0)) {
+          errors.push(`第 ${index + 1} 行：重量无效`);
+          return;
+        }
+
+        items.push({ tr, cost, profit, weight, index });
+      });
+
+      return { items, errors };
+    }
+
+    function runCalculate() {
+      const sitesData = getSitesConfig();
+      const fx = getFxRates();
+      const { items, errors } = collectRows();
+
+      document.querySelectorAll("#productRows tr").forEach(clearRowPrices);
+
+      if (items.length === 0) {
+        showMsg("pricingMessage", errors.length ? errors.join("；") : "请至少填写一行", "error");
+        document.getElementById("exportBtn").disabled = true;
+        lastExportData = [];
+        return;
+      }
+
+      lastExportData = [];
+
+      items.forEach(({ tr, cost, profit, weight, index }) => {
+        const rowExport = {
+          index: index + 1,
+          cost,
+          weight: weightForShipping(weight),
+          weightInput: weight,
+          profit,
+          sites: {},
+        };
+
+        SITES.forEach((s) => {
+          const siteCfg = buildSiteConfig(s.id, sitesData, fx);
+          const result = calculateRow(cost, weight, profit, s, siteCfg);
+          const td = tr.querySelector(`.price-cell[data-site="${s.id}"]`);
+          setPriceCell(td, result, s);
+          rowExport.sites[s.id] = result;
+        });
+
+        lastExportData.push(rowExport);
+      });
+
+      document.getElementById("exportBtn").disabled = lastExportData.length === 0;
+
+      if (errors.length) {
+        showMsg("pricingMessage", `已计算 ${items.length} 行；跳过：${errors.join("；")}`, "error");
+      } else {
+        showMsg("pricingMessage", `已计算 ${items.length} 行`, "success");
+      }
+    }
+
+    function exportCsv() {
+      if (!lastExportData.length) {
+        showMsg("pricingMessage", "请先计算售价", "error");
+        return;
+      }
+
+      const headers = ["#", "成本价(CNY)", "预估利润(CNY)", "重量(g)"];
+      SITES.forEach((s) => {
+        headers.push(
+          `${s.name}_售价当地`,
+          `${s.name}_售价CNY`,
+          `${s.name}_藏价运费`,
+          `${s.name}_买家运费`,
+          `${s.name}_平台费`,
+          `${s.name}_净利润CNY`
+        );
+      });
+
+      const lines = lastExportData.map((r) => {
+        const row = [r.index, r.cost.toFixed(2), r.profit.toFixed(2), r.weightInput ?? r.weight];
+        SITES.forEach((s) => {
+          const d = r.sites[s.id];
+          if (d.error) {
+            row.push(d.error, "", "", "", "", "");
+          } else {
+            row.push(
+              `${s.symbol}${fmtMoney(d.priceLocal)}`,
+              fmtMoney(d.priceCNY),
+              `${s.symbol}${fmtMoney(d.shippingSeller)}`,
+              `${s.symbol}${fmtMoney(d.shippingBuyer)}`,
+              `${s.symbol}${fmtMoney(d.totalFee)}`,
+              fmtMoney(d.netProfitCNY)
+            );
+          }
+        });
+        return row.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",");
+      });
+
+      const csv = "\uFEFF" + [headers.join(","), ...lines].join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `shopee定价_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      showMsg("pricingMessage", "已导出 CSV", "success");
+    }
+
+    document.getElementById("addRowBtn").addEventListener("click", () => addRow());
+    document.getElementById("calcBtn").addEventListener("click", runCalculate);
+    document.getElementById("exportBtn").addEventListener("click", exportCsv);
+    document.getElementById("batchProfitBtn").addEventListener("click", applyBatchProfit);
+    document.getElementById("batchProfitInput").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") applyBatchProfit();
+    });
+    document.getElementById("batchWeightBtn").addEventListener("click", applyBatchWeight);
+    document.getElementById("batchWeightInput").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") applyBatchWeight();
+    });
+
+    document.getElementById("productRows").addEventListener("click", async (e) => {
+      const btn = e.target.closest(".btn-copy");
+      if (!btn || btn.disabled || !btn.dataset.copyText) return;
+      const ok = await copyText(btn.dataset.copyText);
+      if (ok) {
+        flashCopyBtn(btn);
+      } else {
+        showMsg("pricingMessage", "复制失败", "error");
+      }
+    });
+
+    function init() {
+      if (!localStorage.getItem(STORAGE.sites)) {
+        saveJSON(STORAGE.sites, DEFAULT_SITES);
+      }
+      renderSiteCards();
+      switchTab(localStorage.getItem(STORAGE.tab) === "config" ? "config" : "pricing");
+
+      renderFxDisplay(getFxRates());
+      fetchExchangeRates();
+
+      addRow("50", "20", "120");
+      document.getElementById("batchProfitInput").value = "20";
+      document.getElementById("batchWeightInput").value = "120";
+      addRow();
+      addRow();
+    }
+
+    init();
+  </script>
+</body>
+</html>

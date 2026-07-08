@@ -1,0 +1,62 @@
+{
+  "manifest_version": 3,
+  "name": "Shopee跨境运营助手-虾皮定价/聊聊催取件",
+  "version": "1.3.8",
+  "description": "Shopee定价模拟器、老品跨站定价、派件异常催取",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "打开 Shopee跨境运营助手",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["sidePanel", "storage", "tabs", "clipboardWrite", "scripting"],
+  "host_permissions": [
+    "https://open.er-api.com/*",
+    "https://raw.githubusercontent.com/*",
+    "http://127.0.0.1:8765/*",
+    "http://localhost:8765/*",
+    "https://seller.shopee.cn/*",
+    "https://seller.ph.shopee.cn/*",
+    "https://seller.th.shopee.cn/*",
+    "https://seller.my.shopee.cn/*",
+    "https://seller.sg.shopee.cn/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://seller.shopee.cn/*",
+        "https://seller.ph.shopee.cn/*",
+        "https://seller.th.shopee.cn/*",
+        "https://seller.my.shopee.cn/*",
+        "https://seller.sg.shopee.cn/*"
+      ],
+      "js": ["js/pricing-core.js", "js/delivery-urge-core.js", "content/shopee-order-scanner.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://seller.shopee.cn/webchat/*",
+        "https://seller.ph.shopee.cn/webchat/*",
+        "https://seller.th.shopee.cn/webchat/*",
+        "https://seller.my.shopee.cn/webchat/*",
+        "https://seller.sg.shopee.cn/webchat/*"
+      ],
+      "js": ["content/shopee-webchat-helper.js"],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    }
+  ]
+}

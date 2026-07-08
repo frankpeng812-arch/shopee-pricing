@@ -1,0 +1,14 @@
+# 私钥 — 绝对不能上传
+scripts/du_license_ed25519_private.pem
+scripts/du_license_private.pem
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# 上传的 Excel 缓存
+server/data/uploads/
+
+# macOS
+.DS_Store
