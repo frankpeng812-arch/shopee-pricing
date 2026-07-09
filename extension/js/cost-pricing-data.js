@@ -1,4 +1,4 @@
-/** 成本定价 — 站点渠道数据（bundled fallback，与 remote-config.json shipping.sites 同步） */
+/** 成本定价 — 站点渠道数据（bundled fallback） */
 const COST_PRICING_SITE_DATA = {
   "AR": {
     "name": "阿根廷",
@@ -165,9 +165,9 @@ const COST_PRICING_SITE_DATA = {
           "stepWeight": 10.0,
           "stepPrice": 0.15,
           "buyerBaseWeight": 800.0,
-          "buyerBasePrice": 2.5,
+          "buyerBasePrice": 0.0,
           "buyerStepWeight": 250.0,
-          "buyerStepPrice": 2.2
+          "buyerStepPrice": 0.0
         },
         "SPX Express Lockers (Overseas)\n(买家自提渠道) [Zone KV]": {
           "type": "pickup",
@@ -177,9 +177,9 @@ const COST_PRICING_SITE_DATA = {
           "stepWeight": 10.0,
           "stepPrice": 0.15,
           "buyerBaseWeight": 800.0,
-          "buyerBasePrice": 2.5,
+          "buyerBasePrice": 0.0,
           "buyerStepWeight": 250.0,
-          "buyerStepPrice": 2.2
+          "buyerStepPrice": 0.0
         },
         "Doorstep Delivery (International Sea Shipping)\n(海运经济渠道) [Zone KV]": {
           "type": "sea",
@@ -384,9 +384,9 @@ const COST_PRICING_SITE_DATA = {
         "Doorstep Delivery (Sea Shipping)\n(海运渠道)": {
           "type": "sea",
           "label": "海运渠道",
-          "baseWeight": 2000,
+          "baseWeight": 2000.0,
           "basePrice": 3.4,
-          "stepWeight": 1000,
+          "stepWeight": 1000.0,
           "stepPrice": 0.4,
           "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
@@ -666,6 +666,18 @@ const COST_PRICING_SITE_DATA = {
           "buyerBasePrice": 15.0,
           "buyerStepWeight": 10.0,
           "buyerStepPrice": 0.0
+        },
+        "Standard International [Zone A1]": {
+          "type": "air",
+          "label": "Standard International",
+          "baseWeight": 10.0,
+          "basePrice": 400.0,
+          "stepWeight": 10.0,
+          "stepPrice": 90.0,
+          "buyerBaseWeight": 1000.0,
+          "buyerBasePrice": 7200.0,
+          "buyerStepWeight": 1000.0,
+          "buyerStepPrice": 1400.0
         }
       },
       "特货": {
