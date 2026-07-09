@@ -1,6 +1,6 @@
 {
   "version": "6d989dc4ac844591",
-  "updatedAt": "2026-07-09T01:21:15.002909+00:00",
+  "updatedAt": "2026-07-09T09:05:41.151842+00:00",
   "shipping": {
     "sourceFile": "跨境物流成本（藏价）计算工具+-+20260629生效.xlsx",
     "checksum": "88017e3f9f0429ea",
@@ -25,9 +25,9 @@
               "basePrice": 1426.0,
               "stepWeight": 10.0,
               "stepPrice": 377.0,
-              "buyerBaseWeight": 10.0,
+              "buyerBaseWeight": 0.0,
               "buyerBasePrice": 0.0,
-              "buyerStepWeight": 10.0,
+              "buyerStepWeight": 0.0,
               "buyerStepPrice": 0.0
             }
           }
@@ -93,9 +93,9 @@
               "basePrice": 21.2,
               "stepWeight": 10.0,
               "stepPrice": 2.8,
-              "buyerBaseWeight": 10.0,
+              "buyerBaseWeight": 0.0,
               "buyerBasePrice": 0.0,
-              "buyerStepWeight": 10.0,
+              "buyerStepWeight": 0.0,
               "buyerStepPrice": 0.0
             },
             "Estandar Rapido\n(标准渠道）HK)": {
@@ -105,9 +105,9 @@
               "basePrice": 29.2,
               "stepWeight": 10.0,
               "stepPrice": 4.0,
-              "buyerBaseWeight": 10.0,
+              "buyerBaseWeight": 0.0,
               "buyerBasePrice": 0.0,
-              "buyerStepWeight": 10.0,
+              "buyerStepWeight": 0.0,
               "buyerStepPrice": 0.0
             }
           },
@@ -119,9 +119,9 @@
               "basePrice": 41.2,
               "stepWeight": 10.0,
               "stepPrice": 4.0,
-              "buyerBaseWeight": 10.0,
+              "buyerBaseWeight": 0.0,
               "buyerBasePrice": 0.0,
-              "buyerStepWeight": 10.0,
+              "buyerStepWeight": 0.0,
               "buyerStepPrice": 0.0
             }
           }
@@ -244,9 +244,9 @@
               "basePrice": 7.5,
               "stepWeight": 1000.0,
               "stepPrice": 5.0,
-              "buyerBaseWeight": 10.0,
+              "buyerBaseWeight": 0.0,
               "buyerBasePrice": 0.0,
-              "buyerStepWeight": 10.0,
+              "buyerStepWeight": 0.0,
               "buyerStepPrice": 0.0
             }
           }
@@ -346,9 +346,9 @@
               "basePrice": 1.26,
               "stepWeight": 10.0,
               "stepPrice": 0.15,
-              "buyerBaseWeight": 10.0,
+              "buyerBaseWeight": 0.0,
               "buyerBasePrice": 0.0,
-              "buyerStepWeight": 10.0,
+              "buyerStepWeight": 0.0,
               "buyerStepPrice": 0.0
             },
             "Pick Lockers (Overseas)\n(自提柜渠道)": {
@@ -358,9 +358,9 @@
               "basePrice": 1.26,
               "stepWeight": 10.0,
               "stepPrice": 0.15,
-              "buyerBaseWeight": 10.0,
+              "buyerBaseWeight": 0.0,
               "buyerBasePrice": 0.0,
-              "buyerStepWeight": 10.0,
+              "buyerStepWeight": 0.0,
               "buyerStepPrice": 0.0
             },
             "SPX Express Lockers (Overseas)\n(SPX自提柜渠道)": {
@@ -370,9 +370,9 @@
               "basePrice": 1.26,
               "stepWeight": 10.0,
               "stepPrice": 0.15,
-              "buyerBaseWeight": 10.0,
+              "buyerBaseWeight": 0.0,
               "buyerBasePrice": 0.0,
-              "buyerStepWeight": 10.0,
+              "buyerStepWeight": 0.0,
               "buyerStepPrice": 0.0
             },
             "Express Doorstep Delivery (International)\n(快速渠道)": {
@@ -397,7 +397,28 @@
               "buyerBaseWeight": 0.0,
               "buyerBasePrice": 0.0,
               "buyerStepWeight": 0.0,
-              "buyerStepPrice": 0.0
+              "buyerStepPrice": 0.0,
+              "pricingModel": "weightPlusVolume",
+              "weightTiers": [
+                {
+                  "maxWeight": 30000.0,
+                  "baseWeight": 2000.0,
+                  "basePrice": 3.4,
+                  "stepWeight": 1000.0,
+                  "stepPrice": 0.4
+                },
+                {
+                  "maxWeight": null,
+                  "baseWeight": 30000.0,
+                  "basePrice": 14.61,
+                  "stepWeight": 1000.0,
+                  "stepPrice": 0.7
+                }
+              ],
+              "volumeBaseVolume": 0.005,
+              "volumeBasePrice": 0.8,
+              "volumeStepVolume": 0.005,
+              "volumeStepPrice": 0.8
             }
           },
           "重货": {
@@ -852,9 +873,9 @@
               "basePrice": 2.5,
               "stepWeight": 10.0,
               "stepPrice": 2.5,
-              "buyerBaseWeight": 10.0,
+              "buyerBaseWeight": 0.0,
               "buyerBasePrice": 0.0,
-              "buyerStepWeight": 10.0,
+              "buyerStepWeight": 0.0,
               "buyerStepPrice": 0.0
             },
             "蝦皮海外 - 全家": {
@@ -1036,9 +1057,9 @@
         "basePrice": 1.26,
         "stepWeight": 10.0,
         "stepPrice": 0.15,
-        "buyerBaseWeight": 10.0,
+        "buyerBaseWeight": 0.0,
         "buyerBasePrice": 0.0,
-        "buyerStepWeight": 10.0,
+        "buyerStepWeight": 0.0,
         "buyerStepPrice": 0.0
       },
       {
@@ -1057,9 +1078,9 @@
         "basePrice": 1.26,
         "stepWeight": 10.0,
         "stepPrice": 0.15,
-        "buyerBaseWeight": 10.0,
+        "buyerBaseWeight": 0.0,
         "buyerBasePrice": 0.0,
-        "buyerStepWeight": 10.0,
+        "buyerStepWeight": 0.0,
         "buyerStepPrice": 0.0
       },
       {
@@ -1078,9 +1099,9 @@
         "basePrice": 1.26,
         "stepWeight": 10.0,
         "stepPrice": 0.15,
-        "buyerBaseWeight": 10.0,
+        "buyerBaseWeight": 0.0,
         "buyerBasePrice": 0.0,
-        "buyerStepWeight": 10.0,
+        "buyerStepWeight": 0.0,
         "buyerStepPrice": 0.0
       },
       {
@@ -1103,6 +1124,48 @@
         "buyerBasePrice": 1.87,
         "buyerStepWeight": 10.0,
         "buyerStepPrice": 0.0
+      },
+      {
+        "site": "SG",
+        "cargo": "普货",
+        "display": "Doorstep Delivery (Sea Shipping)\n(海运渠道)",
+        "label": "海运渠道",
+        "type": "sea",
+        "pricingModel": "weightPlusVolume",
+        "baseWeight": 2000.0,
+        "basePrice": 3.4,
+        "stepWeight": 1000.0,
+        "stepPrice": 0.4,
+        "buyerBaseWeight": 0.0,
+        "buyerBasePrice": 0.0,
+        "buyerStepWeight": 0.0,
+        "buyerStepPrice": 0.0,
+        "rawBase": "海运渠道藏价=按重量藏价+按体积藏价",
+        "rawStep": "小于等于30kg包裹的重量藏价 / 3.4 / >2000g: 0.4 /1000g\n30kg以上包裹的重量藏价 / 14.61 / >30000g: 0.7 /1000g\n按体积藏价 / 0.8 / >0.005 立方米: 0.8 / 0.005 立方米",
+        "rawBuyerBase": "0",
+        "rawBuyerStep": "",
+        "ruleSummary": "≤30kg: ≤2000g: 3.4；>2000g: 0.4 / 1000g；>30kg: ≤30000g: 14.61；>30000g: 0.7 / 1000g；体积: ≤0.005m³ 0.8；>0.005m³ 0.8/0.005m³",
+        "buyerRuleSummary": "—",
+        "weightTiers": [
+          {
+            "maxWeight": 30000.0,
+            "baseWeight": 2000.0,
+            "basePrice": 3.4,
+            "stepWeight": 1000.0,
+            "stepPrice": 0.4
+          },
+          {
+            "maxWeight": null,
+            "baseWeight": 30000.0,
+            "basePrice": 14.61,
+            "stepWeight": 1000.0,
+            "stepPrice": 0.7
+          }
+        ],
+        "volumeBaseVolume": 0.005,
+        "volumeBasePrice": 0.8,
+        "volumeStepVolume": 0.005,
+        "volumeStepPrice": 0.8
       },
       {
         "site": "MY",
@@ -1876,9 +1939,9 @@
         "basePrice": 21.2,
         "stepWeight": 10.0,
         "stepPrice": 2.8,
-        "buyerBaseWeight": 10.0,
+        "buyerBaseWeight": 0.0,
         "buyerBasePrice": 0.0,
-        "buyerStepWeight": 10.0,
+        "buyerStepWeight": 0.0,
         "buyerStepPrice": 0.0
       },
       {
@@ -1897,9 +1960,9 @@
         "basePrice": 29.2,
         "stepWeight": 10.0,
         "stepPrice": 4.0,
-        "buyerBaseWeight": 10.0,
+        "buyerBaseWeight": 0.0,
         "buyerBasePrice": 0.0,
-        "buyerStepWeight": 10.0,
+        "buyerStepWeight": 0.0,
         "buyerStepPrice": 0.0
       },
       {
@@ -1918,9 +1981,9 @@
         "basePrice": 1426.0,
         "stepWeight": 10.0,
         "stepPrice": 377.0,
-        "buyerBaseWeight": 10.0,
+        "buyerBaseWeight": 0.0,
         "buyerBasePrice": 0.0,
-        "buyerStepWeight": 10.0,
+        "buyerStepWeight": 0.0,
         "buyerStepPrice": 0.0
       },
       {
@@ -2191,9 +2254,9 @@
         "basePrice": 41.2,
         "stepWeight": 10.0,
         "stepPrice": 4.0,
-        "buyerBaseWeight": 10.0,
+        "buyerBaseWeight": 0.0,
         "buyerBasePrice": 0.0,
-        "buyerStepWeight": 10.0,
+        "buyerStepWeight": 0.0,
         "buyerStepPrice": 0.0
       },
       {
@@ -2296,9 +2359,9 @@
         "basePrice": 7.5,
         "stepWeight": 1000.0,
         "stepPrice": 5.0,
-        "buyerBaseWeight": 10.0,
+        "buyerBaseWeight": 0.0,
         "buyerBasePrice": 0.0,
-        "buyerStepWeight": 10.0,
+        "buyerStepWeight": 0.0,
         "buyerStepPrice": 0.0
       },
       {
@@ -2352,7 +2415,7 @@
         "rawBase": "0",
         "rawStep": "",
         "rawBuyerBase": "0kg - 2kg: 120",
-        "rawBuyerStep": "-",
+        "rawBuyerStep": "",
         "ruleSummary": "固定 0",
         "buyerRuleSummary": "—",
         "baseWeight": 10.0,
@@ -2401,9 +2464,9 @@
         "basePrice": 2.5,
         "stepWeight": 10.0,
         "stepPrice": 2.5,
-        "buyerBaseWeight": 10.0,
+        "buyerBaseWeight": 0.0,
         "buyerBasePrice": 0.0,
-        "buyerStepWeight": 10.0,
+        "buyerStepWeight": 0.0,
         "buyerStepPrice": 0.0
       },
       {
@@ -2447,27 +2510,6 @@
         "buyerBasePrice": 50.0,
         "buyerStepWeight": 10.0,
         "buyerStepPrice": 0.0
-      },
-      {
-        "site": "SG",
-        "cargo": "普货",
-        "display": "Doorstep Delivery (Sea Shipping)\n(海运渠道)",
-        "label": "海运渠道",
-        "type": "sea",
-        "baseWeight": 2000.0,
-        "basePrice": 3.4,
-        "stepWeight": 1000.0,
-        "stepPrice": 0.4,
-        "buyerBaseWeight": 0.0,
-        "buyerBasePrice": 0.0,
-        "buyerStepWeight": 0.0,
-        "buyerStepPrice": 0.0,
-        "rawBase": "≤2000g: 3.4",
-        "rawStep": ">2000g: 0.4 / 1000g",
-        "rawBuyerBase": "",
-        "rawBuyerStep": "",
-        "ruleSummary": "≤2000g: 3.4；>2000g: 0.4 / 1000g",
-        "buyerRuleSummary": "—"
       }
     ]
   },

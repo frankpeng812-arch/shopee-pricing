@@ -19,9 +19,9 @@ const COST_PRICING_SITE_DATA = {
           "basePrice": 1426.0,
           "stepWeight": 10.0,
           "stepPrice": 377.0,
-          "buyerBaseWeight": 10.0,
+          "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
-          "buyerStepWeight": 10.0,
+          "buyerStepWeight": 0.0,
           "buyerStepPrice": 0.0
         }
       }
@@ -87,9 +87,9 @@ const COST_PRICING_SITE_DATA = {
           "basePrice": 21.2,
           "stepWeight": 10.0,
           "stepPrice": 2.8,
-          "buyerBaseWeight": 10.0,
+          "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
-          "buyerStepWeight": 10.0,
+          "buyerStepWeight": 0.0,
           "buyerStepPrice": 0.0
         },
         "Estandar Rapido\n(标准渠道）HK)": {
@@ -99,9 +99,9 @@ const COST_PRICING_SITE_DATA = {
           "basePrice": 29.2,
           "stepWeight": 10.0,
           "stepPrice": 4.0,
-          "buyerBaseWeight": 10.0,
+          "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
-          "buyerStepWeight": 10.0,
+          "buyerStepWeight": 0.0,
           "buyerStepPrice": 0.0
         }
       },
@@ -113,9 +113,9 @@ const COST_PRICING_SITE_DATA = {
           "basePrice": 41.2,
           "stepWeight": 10.0,
           "stepPrice": 4.0,
-          "buyerBaseWeight": 10.0,
+          "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
-          "buyerStepWeight": 10.0,
+          "buyerStepWeight": 0.0,
           "buyerStepPrice": 0.0
         }
       }
@@ -238,9 +238,9 @@ const COST_PRICING_SITE_DATA = {
           "basePrice": 7.5,
           "stepWeight": 1000.0,
           "stepPrice": 5.0,
-          "buyerBaseWeight": 10.0,
+          "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
-          "buyerStepWeight": 10.0,
+          "buyerStepWeight": 0.0,
           "buyerStepPrice": 0.0
         }
       }
@@ -340,9 +340,9 @@ const COST_PRICING_SITE_DATA = {
           "basePrice": 1.26,
           "stepWeight": 10.0,
           "stepPrice": 0.15,
-          "buyerBaseWeight": 10.0,
+          "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
-          "buyerStepWeight": 10.0,
+          "buyerStepWeight": 0.0,
           "buyerStepPrice": 0.0
         },
         "Pick Lockers (Overseas)\n(自提柜渠道)": {
@@ -352,9 +352,9 @@ const COST_PRICING_SITE_DATA = {
           "basePrice": 1.26,
           "stepWeight": 10.0,
           "stepPrice": 0.15,
-          "buyerBaseWeight": 10.0,
+          "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
-          "buyerStepWeight": 10.0,
+          "buyerStepWeight": 0.0,
           "buyerStepPrice": 0.0
         },
         "SPX Express Lockers (Overseas)\n(SPX自提柜渠道)": {
@@ -364,9 +364,9 @@ const COST_PRICING_SITE_DATA = {
           "basePrice": 1.26,
           "stepWeight": 10.0,
           "stepPrice": 0.15,
-          "buyerBaseWeight": 10.0,
+          "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
-          "buyerStepWeight": 10.0,
+          "buyerStepWeight": 0.0,
           "buyerStepPrice": 0.0
         },
         "Express Doorstep Delivery (International)\n(快速渠道)": {
@@ -391,7 +391,28 @@ const COST_PRICING_SITE_DATA = {
           "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
           "buyerStepWeight": 0.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightPlusVolume",
+          "weightTiers": [
+            {
+              "maxWeight": 30000.0,
+              "baseWeight": 2000.0,
+              "basePrice": 3.4,
+              "stepWeight": 1000.0,
+              "stepPrice": 0.4
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 30000.0,
+              "basePrice": 14.61,
+              "stepWeight": 1000.0,
+              "stepPrice": 0.7
+            }
+          ],
+          "volumeBaseVolume": 0.005,
+          "volumeBasePrice": 0.8,
+          "volumeStepVolume": 0.005,
+          "volumeStepPrice": 0.8
         }
       },
       "重货": {
@@ -846,9 +867,9 @@ const COST_PRICING_SITE_DATA = {
           "basePrice": 2.5,
           "stepWeight": 10.0,
           "stepPrice": 2.5,
-          "buyerBaseWeight": 10.0,
+          "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
-          "buyerStepWeight": 10.0,
+          "buyerStepWeight": 0.0,
           "buyerStepPrice": 0.0
         },
         "蝦皮海外 - 全家": {
