@@ -39,31 +39,106 @@ const COST_PRICING_SITE_DATA = {
     "ccbRate": 0.03,
     "cargoTypes": {
       "普货": {
-        "Expresso padrão\n(标准渠道) [Zone A]": {
+        "Expresso padrão\n(标准渠道)": {
           "type": "air",
           "label": "标准渠道",
           "baseWeight": 30.0,
           "basePrice": 5.0,
-          "stepWeight": 10.0,
-          "stepPrice": 0.9,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 13.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 30.0,
+              "baseWeight": 30.0,
+              "basePrice": 5.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 100.0,
+              "baseWeight": 30.0,
+              "basePrice": 5.0,
+              "stepWeight": 10.0,
+              "stepPrice": 1.4
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 100.0,
+              "basePrice": 14.799999999999999,
+              "stepWeight": 10.0,
+              "stepPrice": 0.9
+            }
+          ]
         }
       },
       "特货": {
-        "Envio especial (特貨渠道) [Zone A]": {
+        "Envio especial (特貨渠道)": {
           "type": "air",
           "label": "Envio especial",
           "baseWeight": 30.0,
           "basePrice": 5.0,
-          "stepWeight": 10.0,
-          "stepPrice": 0.9,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 20.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 30.0,
+              "baseWeight": 30.0,
+              "basePrice": 5.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 100.0,
+              "baseWeight": 30.0,
+              "basePrice": 5.0,
+              "stepWeight": 10.0,
+              "stepPrice": 1.4
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 100.0,
+              "basePrice": 14.799999999999999,
+              "stepWeight": 10.0,
+              "stepPrice": 0.9
+            }
+          ]
+        }
+      }
+    }
+  },
+  "KH": {
+    "name": "柬埔寨",
+    "currency": "៛",
+    "currencyCode": "KHR",
+    "css": "kh",
+    "exchangeRate": 570,
+    "commission": 0.12,
+    "transaction": 0.03,
+    "fssRate": 0.04,
+    "ccbRate": 0.03,
+    "cargoTypes": {
+      "普货": {
+        "Standard International\n(标准渠道)": {
+          "type": "air",
+          "label": "标准渠道",
+          "baseWeight": 10.0,
+          "basePrice": 400.0,
+          "stepWeight": 10.0,
+          "stepPrice": 90.0,
+          "buyerBaseWeight": 1000.0,
+          "buyerBasePrice": 7200.0,
+          "buyerStepWeight": 1000.0,
+          "buyerStepPrice": 1400.0
         }
       }
     }
@@ -85,24 +160,65 @@ const COST_PRICING_SITE_DATA = {
           "label": "标准渠道",
           "baseWeight": 10.0,
           "basePrice": 21.2,
-          "stepWeight": 10.0,
-          "stepPrice": 2.8,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
           "buyerStepWeight": 0.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 10.0,
+              "baseWeight": 10.0,
+              "basePrice": 21.2,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 10.0,
+              "basePrice": 21.2,
+              "stepWeight": 10.0,
+              "stepPrice": 2.8
+            }
+          ]
         },
         "Estandar Rapido\n(标准渠道）HK)": {
           "type": "air",
           "label": "标准渠道）HK",
           "baseWeight": 30.0,
           "basePrice": 29.2,
-          "stepWeight": 10.0,
-          "stepPrice": 4.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
           "buyerStepWeight": 0.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 30.0,
+              "baseWeight": 30.0,
+              "basePrice": 29.2,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 100.0,
+              "baseWeight": 30.0,
+              "basePrice": 29.2,
+              "stepWeight": 10.0,
+              "stepPrice": 5.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 100.0,
+              "basePrice": 64.2,
+              "stepWeight": 10.0,
+              "stepPrice": 4.0
+            }
+          ]
         }
       },
       "特货": {
@@ -111,12 +227,36 @@ const COST_PRICING_SITE_DATA = {
           "label": "特货渠道）HK",
           "baseWeight": 30.0,
           "basePrice": 41.2,
-          "stepWeight": 10.0,
-          "stepPrice": 4.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
           "buyerStepWeight": 0.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 30.0,
+              "baseWeight": 30.0,
+              "basePrice": 41.2,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 100.0,
+              "baseWeight": 30.0,
+              "basePrice": 41.2,
+              "stepWeight": 10.0,
+              "stepPrice": 5.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 100.0,
+              "basePrice": 76.2,
+              "stepWeight": 10.0,
+              "stepPrice": 4.0
+            }
+          ]
         }
       }
     }
@@ -133,7 +273,7 @@ const COST_PRICING_SITE_DATA = {
     "ccbRate": 0.03,
     "cargoTypes": {
       "普货": {
-        "Standard Doorstep Delivery (International)\n(标准渠道) [Zone KV]": {
+        "Standard Doorstep Delivery (International)\n(标准渠道)": {
           "type": "air",
           "label": "标准渠道",
           "baseWeight": 10.0,
@@ -145,7 +285,7 @@ const COST_PRICING_SITE_DATA = {
           "buyerStepWeight": 250.0,
           "buyerStepPrice": 2.2
         },
-        "Express Delivery (International)\n(快速渠道) [Zone KV]": {
+        "Express Delivery (International)\n(快速渠道)": {
           "type": "air",
           "label": "快速渠道",
           "baseWeight": 10.0,
@@ -157,7 +297,7 @@ const COST_PRICING_SITE_DATA = {
           "buyerStepWeight": 250.0,
           "buyerStepPrice": 2.2
         },
-        "Self Collection (Shopee Xpress)\n(买家自提渠道) [Zone KV]": {
+        "Self Collection (Shopee Xpress)\n(买家自提渠道)": {
           "type": "pickup",
           "label": "买家自提渠道",
           "baseWeight": 10.0,
@@ -169,7 +309,7 @@ const COST_PRICING_SITE_DATA = {
           "buyerStepWeight": 250.0,
           "buyerStepPrice": 0.0
         },
-        "SPX Express Lockers (Overseas)\n(买家自提渠道) [Zone KV]": {
+        "SPX Express Lockers (Overseas)\n(买家自提渠道)": {
           "type": "pickup",
           "label": "买家自提渠道",
           "baseWeight": 10.0,
@@ -181,7 +321,7 @@ const COST_PRICING_SITE_DATA = {
           "buyerStepWeight": 250.0,
           "buyerStepPrice": 0.0
         },
-        "Doorstep Delivery (International Sea Shipping)\n(海运经济渠道) [Zone KV]": {
+        "Doorstep Delivery (International Sea Shipping)\n(海运经济渠道)": {
           "type": "sea",
           "label": "海运经济渠道",
           "baseWeight": 10.0,
@@ -207,41 +347,92 @@ const COST_PRICING_SITE_DATA = {
         }
       },
       "重货": {
-        "Standard Doorstep Delivery (International)\n(标准渠道-重货) [Zone KV]": {
+        "Standard Doorstep Delivery (International)\n(标准渠道-重货)": {
           "type": "air",
           "label": "标准渠道-重货",
           "baseWeight": 100.0,
           "basePrice": 2.1,
-          "stepWeight": 100.0,
-          "stepPrice": 1.1,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 800.0,
           "buyerBasePrice": 4.9,
           "buyerStepWeight": 250.0,
-          "buyerStepPrice": 2.2
+          "buyerStepPrice": 2.2,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 100.0,
+              "baseWeight": 100.0,
+              "basePrice": 2.1,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 100.0,
+              "basePrice": 2.1,
+              "stepWeight": 100.0,
+              "stepPrice": 1.1
+            }
+          ]
         },
-        "Express Delivery (International)\n(快速渠道-重货) [Zone KV]": {
+        "Express Delivery (International)\n(快速渠道-重货)": {
           "type": "air",
           "label": "快速渠道-重货",
           "baseWeight": 100.0,
           "basePrice": 2.1,
-          "stepWeight": 100.0,
-          "stepPrice": 1.1,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 800.0,
           "buyerBasePrice": 4.9,
           "buyerStepWeight": 250.0,
-          "buyerStepPrice": 2.2
+          "buyerStepPrice": 2.2,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 100.0,
+              "baseWeight": 100.0,
+              "basePrice": 2.1,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 100.0,
+              "basePrice": 2.1,
+              "stepWeight": 100.0,
+              "stepPrice": 1.1
+            }
+          ]
         },
-        "Doorstep Delivery (International Sea Shipping)\n(海运大件渠道) [Zone KV]": {
+        "Doorstep Delivery (International Sea Shipping)\n(海运大件渠道)": {
           "type": "sea",
           "label": "海运大件渠道",
           "baseWeight": 1000.0,
           "basePrice": 7.5,
-          "stepWeight": 1000.0,
-          "stepPrice": 5.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
           "buyerStepWeight": 0.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 1000.0,
+              "basePrice": 7.5,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 1000.0,
+              "basePrice": 7.5,
+              "stepWeight": 1000.0,
+              "stepPrice": 5.0
+            }
+          ]
         }
       }
     }
@@ -258,53 +449,128 @@ const COST_PRICING_SITE_DATA = {
     "ccbRate": 0.03,
     "cargoTypes": {
       "普货": {
-        "Standard International\n(标准渠道 - 内地) [Zone A]": {
+        "Standard International\n(标准渠道 - 内地)": {
           "type": "air",
           "label": "标准渠道 - 内地",
           "baseWeight": 50.0,
           "basePrice": 23.0,
-          "stepWeight": 10.0,
-          "stepPrice": 4.5,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 40.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 50.0,
+              "baseWeight": 50.0,
+              "basePrice": 23.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 50.0,
+              "basePrice": 23.0,
+              "stepWeight": 10.0,
+              "stepPrice": 4.5
+            }
+          ]
         },
-        "Express International\n(快速渠道 - 内地) [Zone A]": {
+        "Express International\n(快速渠道 - 内地)": {
           "type": "air",
           "label": "快速渠道 - 内地",
           "baseWeight": 50.0,
           "basePrice": 23.0,
-          "stepWeight": 10.0,
-          "stepPrice": 4.5,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 40.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 50.0,
+              "baseWeight": 50.0,
+              "basePrice": 23.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 50.0,
+              "basePrice": 23.0,
+              "stepWeight": 10.0,
+              "stepPrice": 4.5
+            }
+          ]
         },
-        "Standard International\n(标准渠道 - 香港) [Zone A]": {
+        "Standard International\n(标准渠道 - 香港)": {
           "type": "air",
           "label": "标准渠道 - 香港",
           "baseWeight": 50.0,
           "basePrice": 23.0,
-          "stepWeight": 10.0,
-          "stepPrice": 5.5,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 38.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 50.0,
+              "baseWeight": 50.0,
+              "basePrice": 23.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 50.0,
+              "basePrice": 23.0,
+              "stepWeight": 10.0,
+              "stepPrice": 5.5
+            }
+          ]
         },
-        "Economy International (Sea Shipping)\n(海运经济渠道) [Zone A]": {
+        "Economy International (Sea Shipping)\n(海运经济渠道)": {
           "type": "sea",
           "label": "海运经济渠道",
           "baseWeight": 50.0,
           "basePrice": 23.0,
-          "stepWeight": 10.0,
-          "stepPrice": 0.15,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 20.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 50.0,
+              "baseWeight": 50.0,
+              "basePrice": 23.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 140.0,
+              "baseWeight": 50.0,
+              "basePrice": 23.0,
+              "stepWeight": 10.0,
+              "stepPrice": 4.5
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 140.0,
+              "basePrice": 63.1,
+              "stepWeight": 10.0,
+              "stepPrice": 1.9
+            }
+          ]
         }
       }
     }
@@ -455,7 +721,7 @@ const COST_PRICING_SITE_DATA = {
     "ccbRate": 0.03,
     "cargoTypes": {
       "普货": {
-        "Standard International Delivery\n(标准渠道) [Zone A]": {
+        "Standard International Delivery\n(标准渠道)": {
           "type": "air",
           "label": "标准渠道",
           "baseWeight": 10.0,
@@ -467,19 +733,43 @@ const COST_PRICING_SITE_DATA = {
           "buyerStepWeight": 10.0,
           "buyerStepPrice": 0.0
         },
-        "Express International Delivery\n(特快渠道 - 香港) [Zone A]": {
+        "Express International Delivery\n(特快渠道 - 香港)": {
           "type": "air",
           "label": "特快渠道 - 香港",
-          "baseWeight": 500.0,
+          "baseWeight": 10.0,
           "basePrice": 2.0,
           "stepWeight": 10.0,
-          "stepPrice": 0.15,
+          "stepPrice": 2.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 40.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 10.0,
+              "basePrice": 2.0,
+              "stepWeight": 10.0,
+              "stepPrice": 2.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 500.0,
+              "basePrice": 100.0,
+              "stepWeight": 100.0,
+              "stepPrice": 20.0
+            },
+            {
+              "maxWeight": 20000.0,
+              "baseWeight": 2000.0,
+              "basePrice": 400.0,
+              "stepWeight": 500.0,
+              "stepPrice": 135.0
+            }
+          ]
         },
-        "Standard International Delivery\n(标准渠道-南宁仓)*) [Zone A]": {
+        "Standard International Delivery\n(标准渠道-南宁仓)*)": {
           "type": "air",
           "label": "标准渠道-南宁仓)*",
           "baseWeight": 10.0,
@@ -491,7 +781,7 @@ const COST_PRICING_SITE_DATA = {
           "buyerStepWeight": 10.0,
           "buyerStepPrice": 0.0
         },
-        "Express International Delivery\n(特快渠道 - 内地) [Zone A]": {
+        "Express International Delivery\n(特快渠道 - 内地)": {
           "type": "air",
           "label": "特快渠道 - 内地",
           "baseWeight": 10.0,
@@ -503,7 +793,7 @@ const COST_PRICING_SITE_DATA = {
           "buyerStepWeight": 10.0,
           "buyerStepPrice": 0.0
         },
-        "Fast International Delivery\n(快速渠道) [Zone A]": {
+        "Fast International Delivery\n(快速渠道)": {
           "type": "air",
           "label": "快速渠道",
           "baseWeight": 10.0,
@@ -515,7 +805,7 @@ const COST_PRICING_SITE_DATA = {
           "buyerStepWeight": 10.0,
           "buyerStepPrice": 0.0
         },
-        "Fast International Delivery\n(快速渠道-南宁仓)*) [Zone A]": {
+        "Fast International Delivery\n(快速渠道-南宁仓)*)": {
           "type": "air",
           "label": "快速渠道-南宁仓)*",
           "baseWeight": 10.0,
@@ -529,7 +819,7 @@ const COST_PRICING_SITE_DATA = {
         }
       },
       "重货": {
-        "International Delivery Bulky\n(大件渠道) [Zone A]": {
+        "International Delivery Bulky\n(大件渠道)": {
           "type": "air",
           "label": "大件渠道",
           "baseWeight": 10.0,
@@ -561,144 +851,627 @@ const COST_PRICING_SITE_DATA = {
           "label": "蝦皮海外 - 7-11",
           "baseWeight": 500.0,
           "basePrice": 25.0,
-          "stepWeight": 500.0,
-          "stepPrice": 60.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 60.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 500.0,
+              "stepPrice": 30.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 55.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 95.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            }
+          ]
         },
         "蝦皮海外 - 萊爾富 （空運）": {
           "type": "pickup",
           "label": "蝦皮海外 - 萊爾富 （空運）",
           "baseWeight": 500.0,
           "basePrice": 25.0,
-          "stepWeight": 500.0,
-          "stepPrice": 60.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 50.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 500.0,
+              "stepPrice": 30.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 55.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 95.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            }
+          ]
         },
         "蝦皮海外 - 萊爾富 （海運）": {
           "type": "pickup",
           "label": "蝦皮海外 - 萊爾富 （海運）",
           "baseWeight": 500.0,
           "basePrice": 25.0,
-          "stepWeight": 500.0,
-          "stepPrice": 60.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
           "buyerStepWeight": 0.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 500.0,
+              "stepPrice": 30.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 55.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 95.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            }
+          ]
         },
         "蝦皮海外 - 全家": {
           "type": "pickup",
           "label": "蝦皮海外 - 全家",
           "baseWeight": 500.0,
           "basePrice": 25.0,
-          "stepWeight": 500.0,
-          "stepPrice": 60.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 60.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 500.0,
+              "stepPrice": 30.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 55.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 95.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            }
+          ]
         },
         "蝦皮海外 - 宅配（空運）": {
           "type": "air",
           "label": "蝦皮海外 - 宅配（空運）",
           "baseWeight": 500.0,
           "basePrice": 25.0,
-          "stepWeight": 500.0,
-          "stepPrice": 60.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 70.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 500.0,
+              "stepPrice": 30.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 55.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 95.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            }
+          ]
         },
         "蝦皮海外 - 宅配（海運）": {
           "type": "air",
           "label": "蝦皮海外 - 宅配（海運）",
           "baseWeight": 500.0,
           "basePrice": 25.0,
-          "stepWeight": 500.0,
-          "stepPrice": 60.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 20.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 500.0,
+              "stepPrice": 30.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 55.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 95.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            }
+          ]
         },
         "蝦皮海外 - 快速到貨（蝦皮店到店）": {
           "type": "pickup",
           "label": "蝦皮海外 - 快速到貨（蝦皮店到店）",
           "baseWeight": 500.0,
           "basePrice": 25.0,
-          "stepWeight": 500.0,
-          "stepPrice": 60.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 60.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 500.0,
+              "stepPrice": 30.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 55.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 95.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            }
+          ]
         },
         "蝦皮海外 - 蝦皮店到店": {
           "type": "pickup",
           "label": "蝦皮海外 - 蝦皮店到店",
           "baseWeight": 500.0,
           "basePrice": 25.0,
-          "stepWeight": 500.0,
-          "stepPrice": 60.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 45.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 500.0,
+              "stepPrice": 30.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 55.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 95.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            }
+          ]
         },
         "蝦皮海外 - OK MART（海運）": {
           "type": "air",
           "label": "蝦皮海外 - OK MART（海運）",
           "baseWeight": 500.0,
           "basePrice": 25.0,
-          "stepWeight": 500.0,
-          "stepPrice": 60.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 10.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 500.0,
+              "stepPrice": 30.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 55.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 95.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            }
+          ]
         },
         "蝦皮海外 - 711 （海運）": {
           "type": "pickup",
           "label": "蝦皮海外 - 711 （海運）",
           "baseWeight": 500.0,
           "basePrice": 25.0,
-          "stepWeight": 500.0,
-          "stepPrice": 60.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 20.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 500.0,
+              "stepPrice": 30.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 55.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 95.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            }
+          ]
         },
         "蝦皮海外 - 蝦皮店到店 （海運）": {
           "type": "pickup",
           "label": "蝦皮海外 - 蝦皮店到店 （海運）",
           "baseWeight": 500.0,
           "basePrice": 25.0,
-          "stepWeight": 500.0,
-          "stepPrice": 60.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 15.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
-        },
-        "Standard International [Zone A1]": {
-          "type": "air",
-          "label": "Standard International",
-          "baseWeight": 10.0,
-          "basePrice": 400.0,
-          "stepWeight": 10.0,
-          "stepPrice": 90.0,
-          "buyerBaseWeight": 1000.0,
-          "buyerBasePrice": 7200.0,
-          "buyerStepWeight": 1000.0,
-          "buyerStepPrice": 1400.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 25.0,
+              "stepWeight": 500.0,
+              "stepPrice": 30.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 55.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 95.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            }
+          ]
         }
       },
       "特货": {
@@ -707,135 +1480,630 @@ const COST_PRICING_SITE_DATA = {
           "label": "蝦皮海外 - 7-11",
           "baseWeight": 500.0,
           "basePrice": 45.0,
-          "stepWeight": 500.0,
-          "stepPrice": 70.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 60.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 85.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 245.0,
+              "stepWeight": 500.0,
+              "stepPrice": 70.0
+            }
+          ]
         },
         "蝦皮海外 - 萊爾富 （空運）": {
           "type": "pickup",
           "label": "蝦皮海外 - 萊爾富 （空運）",
           "baseWeight": 500.0,
           "basePrice": 45.0,
-          "stepWeight": 500.0,
-          "stepPrice": 70.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 50.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 85.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 245.0,
+              "stepWeight": 500.0,
+              "stepPrice": 70.0
+            }
+          ]
         },
         "蝦皮海外 - 萊爾富 （海運）": {
           "type": "pickup",
           "label": "蝦皮海外 - 萊爾富 （海運）",
           "baseWeight": 500.0,
           "basePrice": 45.0,
-          "stepWeight": 500.0,
-          "stepPrice": 70.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
           "buyerStepWeight": 0.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 85.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 245.0,
+              "stepWeight": 500.0,
+              "stepPrice": 70.0
+            }
+          ]
         },
         "蝦皮海外 - 全家": {
           "type": "pickup",
           "label": "蝦皮海外 - 全家",
           "baseWeight": 500.0,
           "basePrice": 45.0,
-          "stepWeight": 500.0,
-          "stepPrice": 70.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 60.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 85.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 245.0,
+              "stepWeight": 500.0,
+              "stepPrice": 70.0
+            }
+          ]
         },
         "蝦皮海外 - 宅配 （空運）": {
           "type": "air",
           "label": "蝦皮海外 - 宅配 （空運）",
           "baseWeight": 500.0,
           "basePrice": 45.0,
-          "stepWeight": 500.0,
-          "stepPrice": 70.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 70.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 85.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 245.0,
+              "stepWeight": 500.0,
+              "stepPrice": 70.0
+            }
+          ]
         },
         "蝦皮海外 - 宅配（海運）": {
           "type": "air",
           "label": "蝦皮海外 - 宅配（海運）",
           "baseWeight": 500.0,
           "basePrice": 45.0,
-          "stepWeight": 500.0,
-          "stepPrice": 70.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 20.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 85.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 245.0,
+              "stepWeight": 500.0,
+              "stepPrice": 70.0
+            }
+          ]
         },
         "蝦皮海外 - 快速到貨（蝦皮店到店）": {
           "type": "pickup",
           "label": "蝦皮海外 - 快速到貨（蝦皮店到店）",
           "baseWeight": 500.0,
           "basePrice": 45.0,
-          "stepWeight": 500.0,
-          "stepPrice": 70.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 60.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 85.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 245.0,
+              "stepWeight": 500.0,
+              "stepPrice": 70.0
+            }
+          ]
         },
         "蝦皮海外 - 蝦皮店到店": {
           "type": "pickup",
           "label": "蝦皮海外 - 蝦皮店到店",
           "baseWeight": 500.0,
           "basePrice": 45.0,
-          "stepWeight": 500.0,
-          "stepPrice": 70.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 45.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 85.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 245.0,
+              "stepWeight": 500.0,
+              "stepPrice": 70.0
+            }
+          ]
         },
         "蝦皮海外 - OK MART（海運）": {
           "type": "air",
           "label": "蝦皮海外 - OK MART（海運）",
           "baseWeight": 500.0,
           "basePrice": 45.0,
-          "stepWeight": 500.0,
-          "stepPrice": 70.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 10.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 85.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 245.0,
+              "stepWeight": 500.0,
+              "stepPrice": 70.0
+            }
+          ]
         },
         "蝦皮海外 - 711 （海運）": {
           "type": "pickup",
           "label": "蝦皮海外 - 711 （海運）",
           "baseWeight": 500.0,
           "basePrice": 45.0,
-          "stepWeight": 500.0,
-          "stepPrice": 70.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 20.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 85.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 245.0,
+              "stepWeight": 500.0,
+              "stepPrice": 70.0
+            }
+          ]
         },
         "蝦皮海外 - 蝦皮店到店 （海運）": {
           "type": "pickup",
           "label": "蝦皮海外 - 蝦皮店到店 （海運）",
           "baseWeight": 500.0,
           "basePrice": 45.0,
-          "stepWeight": 500.0,
-          "stepPrice": 70.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 15.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 500.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 1000.0,
+              "baseWeight": 500.0,
+              "basePrice": 45.0,
+              "stepWeight": 500.0,
+              "stepPrice": 40.0
+            },
+            {
+              "maxWeight": 1500.0,
+              "baseWeight": 1000.0,
+              "basePrice": 85.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2000.0,
+              "baseWeight": 1500.0,
+              "basePrice": 135.0,
+              "stepWeight": 500.0,
+              "stepPrice": 50.0
+            },
+            {
+              "maxWeight": 2500.0,
+              "baseWeight": 2000.0,
+              "basePrice": 185.0,
+              "stepWeight": 500.0,
+              "stepPrice": 60.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 2500.0,
+              "basePrice": 245.0,
+              "stepWeight": 500.0,
+              "stepPrice": 70.0
+            }
+          ]
         }
       },
-      "重货": {
+      "大件": {
         "蝦皮海外 - 大件宅配（海運）": {
           "type": "air",
           "label": "蝦皮海外 - 大件宅配（海運）",
@@ -847,7 +2115,9 @@ const COST_PRICING_SITE_DATA = {
           "buyerBasePrice": 0.0,
           "buyerStepWeight": 0.0,
           "buyerStepPrice": 0.0
-        },
+        }
+      },
+      "轻小件": {
         "蝦皮海外 - 7-11": {
           "type": "pickup",
           "label": "蝦皮海外 - 7-11",
@@ -911,7 +2181,7 @@ const COST_PRICING_SITE_DATA = {
     "ccbRate": 0.03,
     "cargoTypes": {
       "普货": {
-        "Standard International\n(标准渠道) [Zone A1]": {
+        "Standard International\n(标准渠道)": {
           "type": "air",
           "label": "标准渠道",
           "baseWeight": 10.0,
@@ -923,31 +2193,65 @@ const COST_PRICING_SITE_DATA = {
           "buyerStepWeight": 10.0,
           "buyerStepPrice": 0.0
         },
-        "Standard International\n(标准渠道-南宁仓）*) [Zone A1]": {
+        "Standard International\n(标准渠道-南宁仓）*)": {
           "type": "air",
           "label": "标准渠道-南宁仓）*",
           "baseWeight": 10.0,
           "basePrice": 750.0,
-          "stepWeight": 10.0,
-          "stepPrice": 750.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 10000.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 10.0,
+              "baseWeight": 10.0,
+              "basePrice": 750.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 10.0,
+              "basePrice": 750.0,
+              "stepWeight": 10.0,
+              "stepPrice": 750.0
+            }
+          ]
         },
-        "Standard International (HK)\n(标准渠道 - 香港) [Zone A1]": {
+        "Standard International (HK)\n(标准渠道 - 香港)": {
           "type": "air",
           "label": "标准渠道 - 香港",
           "baseWeight": 10.0,
           "basePrice": 3220.0,
-          "stepWeight": 10.0,
-          "stepPrice": 3220.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 10000.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 10.0,
+              "baseWeight": 10.0,
+              "basePrice": 3220.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 10.0,
+              "basePrice": 3220.0,
+              "stepWeight": 10.0,
+              "stepPrice": 3220.0
+            }
+          ]
         },
-        "Standard International\n(标准渠道 - 高价值) [Zone A1]": {
+        "Standard International\n(标准渠道 - 高价值)": {
           "type": "air",
           "label": "标准渠道 - 高价值",
           "baseWeight": 10.0,
@@ -959,7 +2263,7 @@ const COST_PRICING_SITE_DATA = {
           "buyerStepWeight": 10.0,
           "buyerStepPrice": 0.0
         },
-        "Express International\n(快速渠道) [Zone A1]": {
+        "Express International\n(快速渠道)": {
           "type": "air",
           "label": "快速渠道",
           "baseWeight": 10.0,
@@ -971,19 +2275,36 @@ const COST_PRICING_SITE_DATA = {
           "buyerStepWeight": 10.0,
           "buyerStepPrice": 0.0
         },
-        "Express International-NN\n(快速渠道-南宁仓)*) [Zone A1]": {
+        "Express International-NN\n(快速渠道-南宁仓)*)": {
           "type": "air",
           "label": "快速渠道-南宁仓)*",
           "baseWeight": 10.0,
           "basePrice": 750.0,
-          "stepWeight": 10.0,
-          "stepPrice": 750.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 10000.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 10.0,
+              "baseWeight": 10.0,
+              "basePrice": 750.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 10.0,
+              "basePrice": 750.0,
+              "stepWeight": 10.0,
+              "stepPrice": 750.0
+            }
+          ]
         },
-        "Locker-Standard International\n(自提柜）渠道) [Zone A1]": {
+        "Locker-Standard International\n(自提柜）渠道)": {
           "type": "pickup",
           "label": "自提柜）渠道",
           "baseWeight": 10.0,
@@ -997,17 +2318,34 @@ const COST_PRICING_SITE_DATA = {
         }
       },
       "重货": {
-        "Standard Express\n(标准渠道) [Zone A1]": {
+        "Standard Express\n(标准渠道)": {
           "type": "air",
           "label": "标准渠道",
           "baseWeight": 250.0,
           "basePrice": 22500.0,
-          "stepWeight": 100.0,
-          "stepPrice": 4500.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 10.0,
           "buyerBasePrice": 15000.0,
           "buyerStepWeight": 10.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 250.0,
+              "baseWeight": 250.0,
+              "basePrice": 22500.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 250.0,
+              "basePrice": 22500.0,
+              "stepWeight": 100.0,
+              "stepPrice": 4500.0
+            }
+          ]
         }
       }
     }
