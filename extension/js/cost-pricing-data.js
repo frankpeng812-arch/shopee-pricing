@@ -17,12 +17,43 @@ const COST_PRICING_SITE_DATA = {
           "label": "标准渠道",
           "baseWeight": 30.0,
           "basePrice": 1426.0,
-          "stepWeight": 10.0,
-          "stepPrice": 377.0,
+          "stepWeight": 0.0,
+          "stepPrice": 0.0,
           "buyerBaseWeight": 0.0,
           "buyerBasePrice": 0.0,
           "buyerStepWeight": 0.0,
-          "buyerStepPrice": 0.0
+          "buyerStepPrice": 0.0,
+          "pricingModel": "weightTiers",
+          "weightTiers": [
+            {
+              "maxWeight": 30.0,
+              "baseWeight": 30.0,
+              "basePrice": 1426.0,
+              "stepWeight": 0.0,
+              "stepPrice": 0.0
+            },
+            {
+              "maxWeight": 100.0,
+              "baseWeight": 30.0,
+              "basePrice": 1426.0,
+              "stepWeight": 10.0,
+              "stepPrice": 363.0
+            },
+            {
+              "maxWeight": 220.0,
+              "baseWeight": 100.0,
+              "basePrice": 3967.0,
+              "stepWeight": 10.0,
+              "stepPrice": 699.0
+            },
+            {
+              "maxWeight": null,
+              "baseWeight": 220.0,
+              "basePrice": 12355.0,
+              "stepWeight": 10.0,
+              "stepPrice": 377.0
+            }
+          ]
         }
       }
     }
