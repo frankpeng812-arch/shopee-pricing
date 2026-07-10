@@ -1,6 +1,6 @@
 {
-  "version": "5613890984a267ed",
-  "updatedAt": "2026-07-10T15:04:26.542304+00:00",
+  "version": "5e82427945e593fc",
+  "updatedAt": "2026-07-10T15:11:13.844087+00:00",
   "shipping": {
     "sourceFile": "跨境物流成本（藏价）计算工具+-+20260629生效.xlsx",
     "checksum": "88017e3f9f0429ea",
@@ -5236,79 +5236,79 @@
   },
   "siteFees": {
     "AR": {
+      "commission": 16.0,
       "activity": 0.0,
-      "transaction": 5.0,
-      "withdrawal": 5.0,
       "techSupport": 0.0,
-      "commission": 16.0
+      "transaction": 5.0,
+      "withdrawal": 5.0
     },
     "BR": {
+      "commission": 16.0,
       "activity": 0.0,
-      "transaction": 2.0,
-      "withdrawal": 5.0,
       "techSupport": 6.0,
-      "commission": 16.0
+      "transaction": 2.0,
+      "withdrawal": 0.0
     },
     "KH": {
+      "commission": 22.0,
       "activity": 0.0,
-      "transaction": 8.0,
-      "withdrawal": 5.0,
       "techSupport": 6.0,
-      "commission": 22.0
+      "transaction": 8.0,
+      "withdrawal": 5.0
     },
     "MX": {
+      "commission": 16.0,
       "activity": 0.0,
-      "transaction": 2.0,
-      "withdrawal": 5.0,
       "techSupport": 6.0,
-      "commission": 16.0
+      "transaction": 2.0,
+      "withdrawal": 5.0
     },
     "MY": {
+      "commission": 18.36,
       "activity": 0.0,
-      "transaction": 3.78,
-      "withdrawal": 0.0,
       "techSupport": 5.4,
-      "commission": 18.36
+      "transaction": 3.78,
+      "withdrawal": 0.0
     },
     "PH": {
+      "commission": 12.0,
       "activity": 0.0,
-      "transaction": 2.24,
-      "withdrawal": 0.0,
       "techSupport": 9.0,
-      "commission": 12.0
+      "transaction": 2.24,
+      "withdrawal": 0.0
     },
     "SG": {
+      "commission": 16.0,
       "activity": 0.0,
-      "transaction": 3.0,
-      "withdrawal": 0.0,
       "techSupport": 5.0,
-      "commission": 16.0
+      "transaction": 3.0,
+      "withdrawal": 0.0
     },
     "TH": {
+      "commission": 22.47,
       "activity": 0.0,
-      "transaction": 3.21,
-      "withdrawal": 0.0,
       "techSupport": 5.4,
-      "commission": 22.47
+      "transaction": 3.21,
+      "withdrawal": 0.0
     },
     "TW": {
+      "commission": 14.0,
       "activity": 0.0,
-      "transaction": 2.5,
-      "withdrawal": 5.0,
       "techSupport": 0.0,
-      "commission": 14.0
+      "transaction": 2.5,
+      "withdrawal": 5.0
     },
     "VN": {
+      "commission": 18.0,
       "activity": 0.0,
-      "transaction": 6.0,
-      "withdrawal": 0.0,
       "techSupport": 5.4,
-      "commission": 18.0
+      "transaction": 6.0,
+      "withdrawal": 0.0
     }
   },
   "deliveryUrge": {
     "version": "6ec7f7daf810e0ad",
-    "updatedAt": "2026-07-10T15:04:26.542209+00:00",
+    "updatedAt": "2026-07-10T15:11:13.843985+00:00",
     "global": {
       "delivering": {
         "keywords": [
