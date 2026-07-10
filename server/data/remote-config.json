@@ -1,6 +1,6 @@
 {
-  "version": "33d83ad7e0581f34",
-  "updatedAt": "2026-07-10T13:07:12.259932+00:00",
+  "version": "f642a02f6b1725ac",
+  "updatedAt": "2026-07-10T13:12:46.797083+00:00",
   "shipping": {
     "sourceFile": "跨境物流成本（藏价）计算工具+-+20260629生效.xlsx",
     "checksum": "88017e3f9f0429ea",
@@ -5239,28 +5239,28 @@
       "activity": 0.0,
       "transaction": 5.0,
       "withdrawal": 0.0,
-      "techSupport": 6.0,
+      "techSupport": 0.0,
       "commission": 16.0
     },
     "BR": {
       "activity": 0.0,
       "transaction": 2.0,
       "withdrawal": 0.0,
-      "techSupport": 6.0,
+      "techSupport": 0.0,
       "commission": 16.0
     },
     "KH": {
       "activity": 0.0,
       "transaction": 8.0,
       "withdrawal": 0.0,
-      "techSupport": 6.0,
+      "techSupport": 0.0,
       "commission": 22.0
     },
     "MX": {
       "activity": 0.0,
       "transaction": 2.0,
       "withdrawal": 0.0,
-      "techSupport": 6.0,
+      "techSupport": 0.0,
       "commission": 16.0
     },
     "MY": {
@@ -5274,7 +5274,7 @@
       "activity": 0.0,
       "transaction": 2.24,
       "withdrawal": 0.0,
-      "techSupport": 6.0,
+      "techSupport": 0.0,
       "commission": 12.0
     },
     "SG": {
@@ -5295,7 +5295,7 @@
       "activity": 0.0,
       "transaction": 2.5,
       "withdrawal": 0.0,
-      "techSupport": 6.0,
+      "techSupport": 0.0,
       "commission": 14.0
     },
     "VN": {
@@ -5308,7 +5308,7 @@
   },
   "deliveryUrge": {
     "version": "6ec7f7daf810e0ad",
-    "updatedAt": "2026-07-10T13:07:12.259851+00:00",
+    "updatedAt": "2026-07-10T13:12:46.796978+00:00",
     "global": {
       "delivering": {
         "keywords": [
