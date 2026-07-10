@@ -1,0 +1,153 @@
+{
+  "global": {
+    "delivering": {
+      "keywords": [
+        "out for delivery to buyer",
+        "out for delivery",
+        "out of delivery",
+        "คนขับกำลังนำส่งพัสดุให้ผู้ซื้อ",
+        "กำลังนำส่ง",
+        "包裹正在派送中",
+        "配送员派送中",
+        "正在派送",
+        "派送中",
+        "派件中"
+      ],
+      "patterns": [
+        {
+          "source": "out\\s+(of|for)\\s+delivery(\\s+to\\s+buyer)?",
+          "flags": "i"
+        },
+        {
+          "source": "คนขับกำลังนำส่งพัสดุให้ผู้ซื้อ",
+          "flags": ""
+        },
+        {
+          "source": "กำลังนำส่ง",
+          "flags": ""
+        },
+        {
+          "source": "包裹正在派送中",
+          "flags": ""
+        },
+        {
+          "source": "配送员派送中",
+          "flags": ""
+        },
+        {
+          "source": "正在派送",
+          "flags": ""
+        },
+        {
+          "source": "派送中",
+          "flags": ""
+        },
+        {
+          "source": "派件中",
+          "flags": ""
+        }
+      ],
+      "compound": [
+        [
+          "配運",
+          "取件門市"
+        ]
+      ]
+    },
+    "delivered": {
+      "keywords": [
+        "delivered to buyer",
+        "order has been delivered",
+        "包裹已签收",
+        "已送达",
+        "订单已送达",
+        "received by buyer",
+        "successfully delivered"
+      ],
+      "patterns": [
+        {
+          "source": "delivered\\s+to\\s+buyer",
+          "flags": "i"
+        },
+        {
+          "source": "包裹已签收",
+          "flags": ""
+        },
+        {
+          "source": "已送达",
+          "flags": ""
+        },
+        {
+          "source": "订单已送达",
+          "flags": ""
+        },
+        {
+          "source": "received\\s+by\\s+buyer",
+          "flags": "i"
+        },
+        {
+          "source": "successfully\\s+delivered",
+          "flags": "i"
+        }
+      ],
+      "listKeywords": [
+        "arrived at destination"
+      ]
+    },
+    "failure": {
+      "keywords": [
+        "delivery attempt to buyer was unsuccessful",
+        "delivery attempt was unsuccessful",
+        "unable to collect cod",
+        "delivery unsuccessful",
+        "failed to deliver",
+        "delivery failed",
+        "派送失败",
+        "派送不成功",
+        "未能成功派送",
+        "无法收取",
+        "无法收款",
+        "拒收",
+        "无人签收"
+      ],
+      "patterns": [
+        {
+          "source": "delivery\\s+attempt.*unsuccessful",
+          "flags": "i"
+        },
+        {
+          "source": "unable\\s+to\\s+collect\\s+cod",
+          "flags": "i"
+        },
+        {
+          "source": "failed\\s+to\\s+deliver",
+          "flags": "i"
+        },
+        {
+          "source": "delivery\\s+failed",
+          "flags": "i"
+        },
+        {
+          "source": "派送失败",
+          "flags": ""
+        },
+        {
+          "source": "未能成功派送",
+          "flags": ""
+        },
+        {
+          "source": "无法收取",
+          "flags": ""
+        }
+      ]
+    }
+  },
+  "sites": {
+    "PH": {},
+    "TH": {},
+    "MY": {},
+    "SG": {}
+  },
+  "version": "6ec7f7daf810e0ad",
+  "updatedAt": "2026-07-10T12:01:55.323228+00:00"
+}
