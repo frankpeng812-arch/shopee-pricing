@@ -11,7 +11,7 @@ const BUNDLED_SITE_FEES = {
     "activity": 0.0,
     "transaction": 2.0,
     "withdrawal": 5.0,
-    "techSupport": 0.0,
+    "techSupport": 6.0,
     "commission": 16.0
   },
   "KH": {
