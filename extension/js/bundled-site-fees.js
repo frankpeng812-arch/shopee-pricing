@@ -4,28 +4,28 @@ const BUNDLED_SITE_FEES = {
     "activity": 0.0,
     "transaction": 5.0,
     "withdrawal": 0.0,
-    "techSupport": 0.0,
+    "techSupport": 6.0,
     "commission": 16.0
   },
   "BR": {
     "activity": 0.0,
     "transaction": 2.0,
     "withdrawal": 0.0,
-    "techSupport": 0.0,
+    "techSupport": 6.0,
     "commission": 16.0
   },
   "KH": {
     "activity": 0.0,
     "transaction": 8.0,
     "withdrawal": 0.0,
-    "techSupport": 0.0,
+    "techSupport": 6.0,
     "commission": 22.0
   },
   "MX": {
     "activity": 0.0,
     "transaction": 2.0,
     "withdrawal": 0.0,
-    "techSupport": 0.0,
+    "techSupport": 6.0,
     "commission": 16.0
   },
   "MY": {
@@ -39,7 +39,7 @@ const BUNDLED_SITE_FEES = {
     "activity": 0.0,
     "transaction": 2.24,
     "withdrawal": 0.0,
-    "techSupport": 0.0,
+    "techSupport": 6.0,
     "commission": 12.0
   },
   "SG": {
@@ -60,7 +60,7 @@ const BUNDLED_SITE_FEES = {
     "activity": 0.0,
     "transaction": 2.5,
     "withdrawal": 0.0,
-    "techSupport": 0.0,
+    "techSupport": 6.0,
     "commission": 14.0
   },
   "VN": {
