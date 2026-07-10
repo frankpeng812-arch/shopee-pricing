@@ -9,7 +9,7 @@
   "BR": {
     "commission": 16.0,
     "activity": 0.0,
-    "techSupport": 0.0,
+    "techSupport": 12.0,
     "transaction": 2.0,
     "withdrawal": 0.0
   },
@@ -58,7 +58,7 @@
   "TW": {
     "commission": 14.0,
     "activity": 0.0,
-    "techSupport": 9.0,
+    "techSupport": 12.0,
     "transaction": 2.5,
     "withdrawal": 0.0
   },
