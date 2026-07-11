@@ -10,7 +10,7 @@ const BUNDLED_SITE_FEES = {
   "BR": {
     "commission": 16.0,
     "activity": 0.0,
-    "techSupport": 12.0,
+    "techSupport": 0.0,
     "transaction": 2.0,
     "withdrawal": 0.0
   },
@@ -38,7 +38,7 @@ const BUNDLED_SITE_FEES = {
   "PH": {
     "commission": 12.0,
     "activity": 0.0,
-    "techSupport": 9.0,
+    "techSupport": 0.0,
     "transaction": 2.24,
     "withdrawal": 0.0
   },
@@ -59,7 +59,7 @@ const BUNDLED_SITE_FEES = {
   "TW": {
     "commission": 14.0,
     "activity": 0.0,
-    "techSupport": 12.0,
+    "techSupport": 0.0,
     "transaction": 2.5,
     "withdrawal": 0.0
   },
