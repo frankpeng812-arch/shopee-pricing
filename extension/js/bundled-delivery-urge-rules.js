@@ -1,7 +1,7 @@
 /** 派件催取关键词（bundled fallback，与 delivery-urge-rules.json / remote-config deliveryUrge 同步） */
 const BUNDLED_DELIVERY_URGE_RULES = {
-  "version": "6ec7f7daf810e0ad",
-  "updatedAt": "2026-07-10T12:01:55.323228+00:00",
+  "version": "e064a983d9f4ed7c",
+  "updatedAt": "2026-07-11T03:32:15.482792+00:00",
   "global": {
     "delivering": {
       "keywords": [
@@ -14,7 +14,8 @@ const BUNDLED_DELIVERY_URGE_RULES = {
         "配送员派送中",
         "正在派送",
         "派送中",
-        "派件中"
+        "派件中",
+        "cleared the import customs"
       ],
       "patterns": [
         {

@@ -1,6 +1,6 @@
 {
-  "version": "f642a02f6b1725ac",
-  "updatedAt": "2026-07-11T01:38:38.948512+00:00",
+  "version": "9080b0c36a9b1cc1",
+  "updatedAt": "2026-07-11T03:32:15.492179+00:00",
   "shipping": {
     "sourceFile": "跨境物流成本（藏价）计算工具+-+20260629生效.xlsx",
     "checksum": "88017e3f9f0429ea",
@@ -5307,8 +5307,8 @@
     }
   },
   "deliveryUrge": {
-    "version": "6ec7f7daf810e0ad",
-    "updatedAt": "2026-07-11T01:38:38.948334+00:00",
+    "version": "e064a983d9f4ed7c",
+    "updatedAt": "2026-07-11T03:32:15.491936+00:00",
     "global": {
       "delivering": {
         "keywords": [
@@ -5321,7 +5321,8 @@
           "配送员派送中",
           "正在派送",
           "派送中",
-          "派件中"
+          "派件中",
+          "cleared the import customs"
         ],
         "patterns": [
           {
